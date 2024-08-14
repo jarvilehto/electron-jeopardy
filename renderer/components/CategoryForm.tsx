@@ -9,9 +9,9 @@ const CategoryCard = ({ name, object, changeCategory }) => {
 
 const CategoryForm = (props) => {
   return (
-    <div>
-      <div className="p-2 bg-black rounded border-slate-100 border  flex-col">
-        <h2>Categories {props.categories.length}/6</h2>
+    <div className="rounded border-slate-100 border">
+      <div className="p-2    flex-col">
+        <h2>Categories {props.categories.length}/7</h2>
         <form
           onSubmit={props.formSubmit}
           className=""

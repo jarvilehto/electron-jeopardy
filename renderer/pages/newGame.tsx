@@ -6,10 +6,15 @@ export default function NewGame() {
   const [categories, setCategories] = useState([]);
   const [newCategory, setNewCategory] = useState("");
   const [selectedCategory, setSelectedCategory] = useState({
-    id: "",
+    id: null,
     name: "",
-    questions: [],
-    answers: [],
+    questions: [
+      { points: 100, question: "", answer: "" },
+      { points: 200, question: "", answer: "" },
+      { points: 300, question: "", answer: "" },
+      { points: 400, question: "", answer: "" },
+      { points: 500, question: "", answer: "" },
+    ],
   });
 
   //Creates a new category
@@ -18,11 +23,16 @@ export default function NewGame() {
     const nCategory = {
       id: String(categories.length + 1),
       name: newCategory,
-      questions: [],
-      answers: [],
+      questions: [
+        { points: 100, question: "", answer: "" },
+        { points: 200, question: "", answer: "" },
+        { points: 300, question: "", answer: "" },
+        { points: 400, question: "", answer: "" },
+        { points: 500, question: "", answer: "" },
+      ],
     };
 
-    if (categories.length !== 6) {
+    if (categories.length !== 7) {
       setCategories(categories.concat(nCategory));
     }
     setNewCategory("");
@@ -38,11 +48,19 @@ export default function NewGame() {
       name: category.name,
       id: category.id,
       questions: category.questions,
-      answers: category.answers,
     });
   };
 
   //Saves modified category
+  const handleSaveChanges = () => {
+    const catSave = selectedCategory;
+    catSave.questions.filter((x) => {
+      if (x.points === 100) {
+        x.answer = "test";
+      }
+    });
+    setSelectedCategory(catSave);
+  };
 
   return (
     <React.Fragment>
@@ -67,16 +85,31 @@ export default function NewGame() {
                 <h2>Questio: Selected {selectedCategory.name}</h2>
               </div>
               <div>
-                <p>questions</p>
-                <div></div>
                 <div>
-                  <input />
+                  <p>questions</p>
+                  <button onClick={() => handleSaveChanges()}>save</button>
                 </div>
-              </div>
-              <div>
-                <p>answers</p>
                 <div>
-                  <input />
+                  {selectedCategory.id !== null &&
+                    selectedCategory.questions.map((q) => (
+                      <div key={q.points} className="my-4 mx-1 p-1">
+                        <h3>Question points: {q.points}</h3>
+                        <div className="flex flex-col">
+                          <input
+                            value={q.question !== "" ? q.question : ""}
+                            placeholder="question..."
+                            className="px-1 my-1"
+                            style={{ color: "black" }}
+                          />
+                          <input
+                            value={q.answer !== "" ? q.answer : ""}
+                            placeholder="answer..."
+                            className="px-1 my-1"
+                            style={{ color: "black" }}
+                          />
+                        </div>
+                      </div>
+                    ))}
                 </div>
               </div>
             </div>
