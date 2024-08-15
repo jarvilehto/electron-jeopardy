@@ -1,4 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
+/*
+  WIP: ADD ABILITY TO DO EMBED / PICTURE ANSWERS AND QUESTIONS
+
+*/
 
 const QuestionForm = ({
   selectedCategory,
@@ -6,25 +11,71 @@ const QuestionForm = ({
   categories,
   setCategories,
 }) => {
-  const [question, setQuestion] = useState("");
-  const [answer, setAnswer] = useState("");
+  const [question, setQuestion] = useState({
+    value: { 0: "", 1: "", 2: "", 3: "", 4: "" },
+  });
+  const [answer, setAnswer] = useState({
+    value: { 0: "", 1: "", 2: "", 3: "", 4: "" },
+  });
 
-  const handleQ = (event) => {
-    setQuestion(event.target.value);
+  const handleSaveChanges = () => {
+    const catSave = selectedCategory;
+    catSave.questions.map((q, i) => {
+      q.question = question.value[i];
+      q.answer = answer.value[i];
+    });
+    setSelectedCategory(catSave);
   };
 
-  const handleA = (event) => {
-    setAnswer(event.target.value);
+  const testFunc = () => {
+    let qValue = question.value;
+    let aValue = answer.value;
+    selectedCategory.questions.map((q, i) => {
+      qValue[i] = q.question;
+      aValue[i] = q.answer;
+    });
+    setQuestion({ value: qValue });
+    setAnswer({ value: aValue });
+  };
+
+  useEffect(() => {
+    testFunc();
+  }, [selectedCategory]);
+
+  const handleQ = (index) => (event) => {
+    let { value } = question;
+    value[index] = event.target.value;
+    setQuestion({ value });
+  };
+
+  const handleA = (index) => (event) => {
+    let { value } = answer;
+    value[index] = event.target.value;
+    setAnswer({ value });
   };
 
   return (
     <div>
+      <button onClick={() => handleSaveChanges()}>Save</button>
       {selectedCategory.id !== null &&
-        selectedCategory.questions.map((q) => (
-          <div key={q.points} className="my-4 mx-1 p-1">
+        selectedCategory.questions.map((q, i) => (
+          <div key={q.points} className="my-4 mx-2 p-1">
             <h3>Question points: {q.points}</h3>
-            <div className="flex flex-col">
-              <input />
+            <div className="flex flex-row wrap">
+              <input
+                className="mx-1 p-1"
+                style={{ color: "black" }}
+                placeholder={"Question"}
+                value={question.value[i]}
+                onChange={handleQ(i)}
+              />
+              <input
+                className="mx-1 p-1"
+                style={{ color: "black" }}
+                placeholder={"Answer"}
+                value={answer.value[i]}
+                onChange={handleA(i)}
+              />
             </div>
           </div>
         ))}
@@ -38,35 +89,18 @@ const QuestionCluster = ({
   selectedCategory,
   setSelectedCategory,
 }) => {
-  const handleSaveChanges = () => {
-    const catSave = selectedCategory;
-    catSave.questions.filter((x) => {
-      if (x.points === 100) {
-        x.answer = "test";
-      }
-    });
-    setSelectedCategory(catSave);
-  };
-
   return (
     <div>
       <div>
-        <div>
-          <h2>Questio: Selected {selectedCategory.name}</h2>
-        </div>
-        <div>
-          <div>
-            <p>questions</p>
-            <button onClick={() => handleSaveChanges()}>save</button>
-          </div>
-
-          <QuestionForm
-            categories={categories}
-            setCategories={setCategories}
-            selectedCategory={selectedCategory}
-            setSelectedCategory={setSelectedCategory}
-          />
-        </div>
+        <h2>Category: {selectedCategory.name}</h2>
+      </div>
+      <div>
+        <QuestionForm
+          categories={categories}
+          setCategories={setCategories}
+          selectedCategory={selectedCategory}
+          setSelectedCategory={setSelectedCategory}
+        />
       </div>
     </div>
   );
