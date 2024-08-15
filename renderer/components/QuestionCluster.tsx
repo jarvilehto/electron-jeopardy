@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 
 /*
   WIP: ADD ABILITY TO DO EMBED / PICTURE ANSWERS AND QUESTIONS
-
+  TODO: Multiple answers
+  TODO: Add Embed files / Pictures to questions and answers
 */
 
 const QuestionForm = ({

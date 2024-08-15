@@ -2,6 +2,7 @@ import Head from "next/head";
 import React, { useState } from "react";
 import CategoryForm from "../components/CategoryForm";
 import QuestionCluster from "../components/QuestionCluster";
+import MenuButton from "../components/MenuButton";
 
 export default function NewGame() {
   const [categories, setCategories] = useState([]);
@@ -59,6 +60,7 @@ export default function NewGame() {
       </Head>
       <div className="w-full h-full">
         <h1>Create a new game</h1>
+        <MenuButton text={"Start Game"} navigate={"/gameBoard"} />
         <div className="flex flex-row justify-around">
           <div className="">
             <CategoryForm
