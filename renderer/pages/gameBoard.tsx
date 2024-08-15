@@ -1,14 +1,35 @@
 import { useState } from "react";
 import PlaceholderData from "../components/PlaceholderData";
 
-const questionCard = () => {};
-const answeredQuestionCard = () => {};
+const QuestionCard = ({ pQ, handleOpenQuestion }) => {
+  return (
+    <div className="m-4">
+      <h2>{pQ.name}</h2>
+      {pQ.questions.map((q, i) => (
+        <div key={i}>
+          <button onClick={() => handleOpenQuestion(pQ.id, q.points)}>
+            {q.points}
+          </button>
+        </div>
+      ))}
+    </div>
+  );
+};
+const AnsweredQuestionCard = () => {};
 
-const openQuestion = (porps) => {};
+const OpenQuestion = (props) => {
+  return (
+    <div className="absolute top-10 h-[300px] left-32 right-32   ">
+      <p>openQuestion</p>
+      <button onClick={() => props.toggleModal(false)}>close</button>
+    </div>
+  );
+};
 
 export default function gameBoard() {
   const [categories, setCategories] = useState();
-  const [openQuestion, setOpenQuestion] = useState([]);
+  const [openQuestion, setOpenQuestion] = useState({ id: 0, points: "" });
+  const [modal, setModal] = useState(false);
   const [contestants, setContestants] = useState([]);
   const placeholderQuestions = PlaceholderData;
 
@@ -20,20 +41,32 @@ export default function gameBoard() {
 
   const saveGameState = () => {};
 
+  const handleOpenQuestion = (id: number, points: string) => {
+    setModal(!modal);
+    const openQuestion = {
+      id: id,
+      points: points,
+    };
+    setOpenQuestion(openQuestion);
+  };
+
   return (
-    <div className="h-full w-full">
-      <div className="hidden">Open Question</div>
+    <div className="h-full w-full relative">
+      {modal && (
+        <OpenQuestion
+          toggleModal={setModal}
+          openQuestion={openQuestion}
+          categories={categories}
+        />
+      )}
       <div id="Header"></div>
       <div id="Game" className="flex flex-row justify-center wrap">
         {placeholderQuestions.map((pQ) => (
-          <div key={pQ.id} className="m-4">
-            <h2>{pQ.name}</h2>
-            {pQ.questions.map((q, i) => (
-              <div key={i}>
-                <button>{q.points}</button>
-              </div>
-            ))}
-          </div>
+          <QuestionCard
+            key={pQ.id}
+            pQ={pQ}
+            handleOpenQuestion={handleOpenQuestion}
+          />
         ))}
       </div>
       <div id="Contestants"></div>
