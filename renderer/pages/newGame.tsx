@@ -18,6 +18,7 @@ export default function NewGame() {
       { points: 500, question: "", answer: "" },
     ],
   });
+  const maxCat = 7;
 
   //Creates a new category
   const createNewCategory = (event: any) => {
@@ -34,7 +35,7 @@ export default function NewGame() {
       ],
     };
 
-    if (categories.length !== 7) {
+    if (categories.length !== maxCat) {
       setCategories(categories.concat(nCategory));
     }
     setNewCategory("");
@@ -54,7 +55,7 @@ export default function NewGame() {
   };
 
   return (
-    <React.Fragment>
+    <>
       <Head>
         <title>Create a new game</title>
       </Head>
@@ -79,6 +80,6 @@ export default function NewGame() {
           />
         </div>
       </div>
-    </React.Fragment>
+    </>
   );
 }

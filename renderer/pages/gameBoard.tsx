@@ -1,11 +1,3 @@
-/*
-TODO:
-TODO:
-TODO: Create a board, populate with placeholder data
-TODO: Contestants: names + points 
-
-*/
-
 import { useState } from "react";
 import PlaceholderData from "../components/PlaceholderData";
 
@@ -32,61 +24,17 @@ export default function gameBoard() {
     <div className="h-full w-full">
       <div className="hidden">Open Question</div>
       <div id="Header"></div>
-      <div id="Game" className="flex flex-row justify-center">
-        <div key={placeholderQuestions[0].id} className="m-4">
-          <h2>{placeholderQuestions[0].name}</h2>
-          {placeholderQuestions[0].questions.map((q, i) => (
-            <div key={i}>{q.question}</div>
-          ))}
-        </div>
-        <div className="m-4">
-          <h2>Category name</h2>
-          <div>1</div>
-          <div>2</div>
-          <div>3</div>
-          <div>4</div>
-          <div>5</div>
-        </div>
-        <div className="m-4">
-          <h2>Category name</h2>
-          <div>1</div>
-          <div>2</div>
-          <div>3</div>
-          <div>4</div>
-          <div>5</div>
-        </div>
-        <div className="m-4">
-          <h2>Category name</h2>
-          <div>1</div>
-          <div>2</div>
-          <div>3</div>
-          <div>4</div>
-          <div>5</div>
-        </div>
-        <div className="m-4">
-          <h2>Category name</h2>
-          <div>1</div>
-          <div>2</div>
-          <div>3</div>
-          <div>4</div>
-          <div>5</div>
-        </div>
-        <div className="m-4">
-          <h2>Category name</h2>
-          <div>1</div>
-          <div>2</div>
-          <div>3</div>
-          <div>4</div>
-          <div>5</div>
-        </div>
-        <div className="m-4">
-          <h2>Category name</h2>
-          <div>1</div>
-          <div>2</div>
-          <div>3</div>
-          <div>4</div>
-          <div>5</div>
-        </div>
+      <div id="Game" className="flex flex-row justify-center wrap">
+        {placeholderQuestions.map((pQ) => (
+          <div key={pQ.id} className="m-4">
+            <h2>{pQ.name}</h2>
+            {pQ.questions.map((q, i) => (
+              <div key={i}>
+                <button>{q.points}</button>
+              </div>
+            ))}
+          </div>
+        ))}
       </div>
       <div id="Contestants"></div>
     </div>

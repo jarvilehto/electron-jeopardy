@@ -12,7 +12,7 @@ const PlaceholderData = [
   },
   {
     id: 1,
-    name: "Placeholder 1",
+    name: "Placeholder 2",
     questions: [
       { points: 100, question: "Lorem", answer: "ipsum" },
       { points: 200, question: "lorem", answer: "ipsum" },
@@ -23,7 +23,7 @@ const PlaceholderData = [
   },
   {
     id: 2,
-    name: "Placeholder 1",
+    name: "Placeholder 3",
     questions: [
       { points: 100, question: "Lorem", answer: "ipsum" },
       { points: 200, question: "lorem", answer: "ipsum" },
@@ -34,7 +34,7 @@ const PlaceholderData = [
   },
   {
     id: 3,
-    name: "Placeholder 1",
+    name: "Placeholder 4",
     questions: [
       { points: 100, question: "Lorem", answer: "ipsum" },
       { points: 200, question: "lorem", answer: "ipsum" },
@@ -45,7 +45,7 @@ const PlaceholderData = [
   },
   {
     id: 4,
-    name: "Placeholder 1",
+    name: "Placeholder 5",
     questions: [
       { points: 100, question: "Lorem", answer: "ipsum" },
       { points: 200, question: "lorem", answer: "ipsum" },
@@ -56,7 +56,7 @@ const PlaceholderData = [
   },
   {
     id: 5,
-    name: "Placeholder 1",
+    name: "Placeholder 6",
     questions: [
       { points: 100, question: "Lorem", answer: "ipsum" },
       { points: 200, question: "lorem", answer: "ipsum" },
@@ -67,7 +67,7 @@ const PlaceholderData = [
   },
   {
     id: 6,
-    name: "Placeholder 1",
+    name: "Placeholder 7",
     questions: [
       { points: 100, question: "Lorem", answer: "ipsum" },
       { points: 200, question: "lorem", answer: "ipsum" },
