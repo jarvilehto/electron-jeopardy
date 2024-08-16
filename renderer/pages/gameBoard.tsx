@@ -1,12 +1,13 @@
 import { useState } from "react";
 import PlaceholderData from "../components/PlaceholderData";
+import MenuButton from "../components/MenuButton";
 
 const QuestionCard = ({ pQ, handleOpenQuestion }) => {
   return (
-    <div className="m-4 content-center">
+    <div className="m-4 justify-center  flex wrap flex-col ">
       <h2>{pQ.name}</h2>
       {pQ.questions.map((q, i) => (
-        <div key={i}>
+        <div key={i} className="border boder-round  my-3 p-3 text-center">
           <button onClick={() => handleOpenQuestion(pQ.id, q.points)}>
             {q.points}
           </button>
@@ -59,10 +60,18 @@ export default function gameBoard() {
           categories={categories}
         />
       )}
-      <div id="Header"></div>
+      <div
+        id="Header"
+        className="flex flex-row justify-center content-center wrap w-full"
+      >
+        <div className="">
+          <h1>Jeopardy</h1>
+          <MenuButton text={"return"} navigate={"/newGame"} />
+        </div>
+      </div>
       <div
         id="Game"
-        className="flex flex-row justify-center content-center wrap h-full w-full"
+        className="flex flex-row justify-center content-center wrap  w-full"
       >
         {placeholderQuestions.map((pQ) => (
           <QuestionCard
@@ -72,7 +81,14 @@ export default function gameBoard() {
           />
         ))}
       </div>
-      <div id="Contestants"></div>
+      <div
+        id="Contestants"
+        className="flex flex-row justify-center content-center wrap w-full"
+      >
+        <div className="">
+          <h1>Contestants</h1>
+        </div>
+      </div>
     </div>
   );
 }
