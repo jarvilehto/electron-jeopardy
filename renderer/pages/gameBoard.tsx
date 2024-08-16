@@ -19,20 +19,43 @@ const QuestionCard = ({ pQ, handleOpenQuestion }) => {
 const AnsweredQuestionCard = () => {};
 
 const OpenQuestion = (props) => {
+  const { categories, openQuestion } = props;
+  const CurrentQuestion = categories[openQuestion.id].questions.find(
+    ({ points }) => points === openQuestion.points
+  );
+  const [showAnswer, setShowAnswer] = useState(false);
+
   return (
-    <div className="absolute top-10 h-[300px] left-32 right-32   ">
-      <p>openQuestion</p>
-      <button onClick={() => props.toggleModal(false)}>close</button>
+    <div className="absolute top-10 h-[300px] left-32 right-32 bg-white text-black flex flex-col justify-center items-center">
+      {!showAnswer && (
+        <h1 style={{ color: "black" }}>{CurrentQuestion.question}</h1>
+      )}
+      {showAnswer && (
+        <h1 style={{ color: "black" }}>{CurrentQuestion.answer}</h1>
+      )}
+      <button
+        style={{ color: "black" }}
+        onClick={() => props.toggleModal(false)}
+      >
+        close
+      </button>
+      <button
+        style={{ color: "black" }}
+        onClick={() => setShowAnswer(!showAnswer)}
+      >
+        Correct
+      </button>
+      <button style={{ color: "black" }}>False</button>
     </div>
   );
 };
 
 export default function gameBoard() {
-  const [categories, setCategories] = useState();
+  const placeholderQuestions = PlaceholderData;
+  const [categories, setCategories] = useState(placeholderQuestions);
   const [openQuestion, setOpenQuestion] = useState({ id: 0, points: "" });
   const [modal, setModal] = useState(false);
   const [contestants, setContestants] = useState([]);
-  const placeholderQuestions = PlaceholderData;
 
   // USE this + concat to add contestants
   const contestant = {
@@ -52,7 +75,7 @@ export default function gameBoard() {
   };
 
   return (
-    <div className="h-full w-full relative">
+    <div className="h-full w-full relative text-white">
       {modal && (
         <OpenQuestion
           toggleModal={setModal}
@@ -73,7 +96,7 @@ export default function gameBoard() {
         id="Game"
         className="flex flex-row justify-center content-center wrap  w-full"
       >
-        {placeholderQuestions.map((pQ) => (
+        {categories.map((pQ) => (
           <QuestionCard
             key={pQ.id}
             pQ={pQ}

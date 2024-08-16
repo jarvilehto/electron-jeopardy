@@ -59,7 +59,7 @@ export default function NewGame() {
       <Head>
         <title>Create a new game</title>
       </Head>
-      <div className="w-full h-full">
+      <div className="w-full h-full text-white">
         <h1>Create a new game</h1>
         <MenuButton text={"Start Game"} navigate={"/gameBoard"} />
         <div className="flex flex-row justify-around">
