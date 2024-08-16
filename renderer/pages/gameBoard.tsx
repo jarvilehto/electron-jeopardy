@@ -3,7 +3,7 @@ import PlaceholderData from "../components/PlaceholderData";
 
 const QuestionCard = ({ pQ, handleOpenQuestion }) => {
   return (
-    <div className="m-4">
+    <div className="m-4 content-center">
       <h2>{pQ.name}</h2>
       {pQ.questions.map((q, i) => (
         <div key={i}>
@@ -60,7 +60,10 @@ export default function gameBoard() {
         />
       )}
       <div id="Header"></div>
-      <div id="Game" className="flex flex-row justify-center wrap">
+      <div
+        id="Game"
+        className="flex flex-row justify-center content-center wrap h-full w-full"
+      >
         {placeholderQuestions.map((pQ) => (
           <QuestionCard
             key={pQ.id}
