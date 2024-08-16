@@ -16,7 +16,10 @@ const QuestionCard = ({ pQ, handleOpenQuestion }) => {
     </div>
   );
 };
+
 const AnsweredQuestionCard = () => {};
+
+const ContestantCard = () => {};
 
 const OpenQuestion = (props) => {
   const { categories, openQuestion } = props;
@@ -56,9 +59,10 @@ export default function gameBoard() {
   const [openQuestion, setOpenQuestion] = useState({ id: 0, points: "" });
   const [modal, setModal] = useState(false);
   const [contestants, setContestants] = useState([]);
-
+  const [contestant, setContestant] = useState("");
   // USE this + concat to add contestants
-  const contestant = {
+  const newContestant = {
+    id: String(contestants.length),
     name: "",
     points: "",
   };
@@ -72,6 +76,23 @@ export default function gameBoard() {
       points: points,
     };
     setOpenQuestion(openQuestion);
+  };
+
+  const handleContestantInput = (e) => {
+    console.log(e.target.value);
+    setContestant(e.target.value);
+  };
+
+  const createContestant = (event) => {
+    console.log("after", contestants);
+    event.preventDefault();
+    const newContestant = {
+      id: String(contestants.length),
+      name: contestant,
+      points: 0,
+    };
+    setContestants(contestants.concat(newContestant));
+    setContestant("");
   };
 
   return (
@@ -108,8 +129,28 @@ export default function gameBoard() {
         id="Contestants"
         className="flex flex-row justify-center content-center wrap w-full"
       >
-        <div className="">
-          <h1>Contestants</h1>
+        <div className="border p-3  w-11/12">
+          <div className="flex flex-row items-center justify-between border-b pb-3">
+            <h1>Contestants</h1>
+            <form onSubmit={createContestant}>
+              <input
+                style={{ color: "black" }}
+                className="px-2"
+                type="text"
+                placeholder="cool name..."
+                value={contestant}
+                onChange={handleContestantInput}
+              />
+            </form>
+          </div>
+          <div className=" p-2 grid grid-flow-col auto-cols-max gap-10">
+            {contestants.map((contestant) => (
+              <div>
+                <h1>{contestant.name}</h1>
+                <h2>{contestant.points}</h2>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>

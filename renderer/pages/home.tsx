@@ -10,7 +10,7 @@ export default function HomePage() {
       <Head>
         <title>Jeopardy andy</title>
       </Head>
-      <div className="grid grid-col-1 text-2xl w-full text-center">
+      <div className="grid grid-col-1 text-2xl w-full text-center text-white">
         <div>
           <Image
             className="ml-auto mr-auto"
