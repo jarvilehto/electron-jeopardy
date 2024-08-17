@@ -3,6 +3,13 @@ import PlaceholderData from "../components/PlaceholderData";
 import GameQuestionContainer from "../components/GameQuestionContainer";
 import GameHeaderComponent from "../components/GameHeaderComponent";
 
+/*
+TODO: IMAGES / MULTI QUESTION / ANSWER / EMBEDS
+TODO: POINT SYSTEM - Add points inside card, modify and add custom points outside of card
+TODO: ADD SOUND WHEN WRONG ANSWER
+TODO: ADD SOUND WHEN CORRECT ANSWER
+*/
+
 const QuestionCard = ({ pQ, handleOpenQuestion }) => {
   return (
     <div className="m-4 justify-center  flex wrap flex-col w-[250px] h-[150px] ">
@@ -26,7 +33,7 @@ export default function gameBoard() {
   const placeholderQuestions = PlaceholderData;
   const [categories, setCategories] = useState(placeholderQuestions);
   const [openQuestion, setOpenQuestion] = useState({ id: 0, points: "" });
-  const [modal, setModal] = useState(false);
+  const [modal, setModal] = useState(true);
   const [contestants, setContestants] = useState([]);
   const [contestant, setContestant] = useState("");
   // USE this + concat to add contestants
@@ -69,6 +76,8 @@ export default function gameBoard() {
             toggleModal={setModal}
             openQuestion={openQuestion}
             categories={categories}
+            contestants={contestant}
+            setContestants={setContestant}
           />
         )}
         <GameHeaderComponent />
@@ -76,7 +85,7 @@ export default function gameBoard() {
           categories={categories}
           handleOpenQuestion={handleOpenQuestion}
         />
-        <div id="gameContestants" className=" p-2 my-5 text-white">
+        <div id="gameContestants" className=" p-2 my-5 bg-white">
           <div className="flex flex-row items-center justify-between border-b pb-3">
             <h1>Contestants</h1>
             <form onSubmit={createContestant}>
@@ -90,9 +99,13 @@ export default function gameBoard() {
               />
             </form>
           </div>
-          <div id="contestants-game">
+          <div></div>
+          <div id="contestants-game" className="w-full">
             {contestants.map((contestant, i) => (
-              <div key={i}>
+              <div
+                key={i}
+                className="flex flex-col justify-center items-center align-center"
+              >
                 <h1>{contestant.name}</h1>
                 <h2>{contestant.points}</h2>
               </div>
@@ -106,32 +119,48 @@ export default function gameBoard() {
 
 const OpenQuestion = (props) => {
   const { categories, openQuestion } = props;
+  /*
   const CurrentQuestion = categories[openQuestion.id].questions.find(
     ({ points }) => points === openQuestion.points
   );
+  */
+
+  const CurrentQuestion = {
+    answer: "ipsum",
+    answered: false,
+    points: 100,
+    question: "lorem",
+  };
   const [showAnswer, setShowAnswer] = useState(false);
 
   return (
-    <div className="absolute top-10 h-[300px] left-32 right-32 bg-white text-black flex flex-col justify-center items-center">
-      {!showAnswer && (
-        <h1 style={{ color: "black" }}>{CurrentQuestion.question}</h1>
-      )}
-      {showAnswer && (
-        <h1 style={{ color: "black" }}>{CurrentQuestion.answer}</h1>
-      )}
-      <button
-        style={{ color: "black" }}
-        onClick={() => props.toggleModal(false)}
-      >
-        close
-      </button>
-      <button
-        style={{ color: "black" }}
-        onClick={() => setShowAnswer(!showAnswer)}
-      >
-        Correct
-      </button>
-      <button style={{ color: "black" }}>False</button>
+    <div className="absolute border-2 border-black top-28 h-[500px] left-32 right-32 bg-white text-black">
+      <div className="w-full h-full flex flex-col justify-center items-center relative">
+        {!showAnswer && (
+          <>
+            <h1 className="text-6xl" style={{ color: "black" }}>
+              {CurrentQuestion.question}
+            </h1>
+            <div className="absolute bottom-0 right-2 text-4xl p-2">
+              <button onClick={() => setShowAnswer(!showAnswer)}>✅</button>
+              <button>❌</button>
+            </div>
+          </>
+        )}
+        {showAnswer && (
+          <>
+            <h1 className="text-6xl" style={{ color: "black" }}>
+              {CurrentQuestion.answer}
+            </h1>
+            <div className="absolute bottom-0 right-2 text-4xl p-2">
+              <button>🏆</button>
+            </div>
+          </>
+        )}
+        <div className="absolute top-0 right-2 text-2xl mr-2">
+          <button onClick={() => props.toggleModal(false)}>x</button>
+        </div>
+      </div>
     </div>
   );
 };
