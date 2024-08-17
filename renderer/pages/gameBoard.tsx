@@ -4,7 +4,7 @@ import MenuButton from "../components/MenuButton";
 
 const QuestionCard = ({ pQ, handleOpenQuestion }) => {
   return (
-    <div className="m-4 justify-center  flex wrap flex-col ">
+    <div className="m-4 justify-center  flex wrap flex-col w-[250px] h-[150px] ">
       <h2>{pQ.name}</h2>
       {pQ.questions.map((q, i) => (
         <div key={i} className="border boder-round  my-3 p-3 text-center">
@@ -79,12 +79,10 @@ export default function gameBoard() {
   };
 
   const handleContestantInput = (e) => {
-    console.log(e.target.value);
     setContestant(e.target.value);
   };
 
   const createContestant = (event) => {
-    console.log("after", contestants);
     event.preventDefault();
     const newContestant = {
       id: String(contestants.length),
@@ -96,7 +94,7 @@ export default function gameBoard() {
   };
 
   return (
-    <div className="h-full w-full relative text-white">
+    <div className="h-full w-full relative text-white flex flex-col">
       {modal && (
         <OpenQuestion
           toggleModal={setModal}
@@ -127,7 +125,7 @@ export default function gameBoard() {
       </div>
       <div
         id="Contestants"
-        className="flex flex-row justify-center content-center wrap w-full"
+        className="flex flex-row justify-center content-center wrap w-full max-w-[940px] m-auto"
       >
         <div className="border p-3  w-11/12">
           <div className="flex flex-row items-center justify-between border-b pb-3">
@@ -143,9 +141,9 @@ export default function gameBoard() {
               />
             </form>
           </div>
-          <div className=" p-2 grid grid-flow-col auto-cols-max gap-10">
-            {contestants.map((contestant) => (
-              <div>
+          <div id="contestants-game">
+            {contestants.map((contestant, i) => (
+              <div key={i}>
                 <h1>{contestant.name}</h1>
                 <h2>{contestant.points}</h2>
               </div>
