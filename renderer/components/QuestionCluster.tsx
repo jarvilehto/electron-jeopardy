@@ -56,7 +56,74 @@ const QuestionForm = ({
   };
 
   return (
-    <div>
+    <>
+      <div className="flex flex-row justify-around wrap">
+        {selectedCategory.id !== null &&
+          selectedCategory.questions.map((q, i) => (
+            <div
+              key={q.points}
+              className=" my-4 mx-2 p-1 flex flex-col justify-center items-center"
+            >
+              <div className="border-b w-full mb-2">
+                <h3 className="text-center text-xl py-1">{q.points}</h3>
+              </div>
+              <div className="flex flex-col wrap">
+                {/*
+                  * Add radio buttons for 
+                  - Media Question/Answer
+                */}
+                <input
+                  className="my-1 p-1 px-2 rounded"
+                  style={{ color: "black" }}
+                  placeholder={"Question"}
+                  value={question.value[i]}
+                  onChange={handleQ(i)}
+                />
+                <input
+                  className="my-1 p-1 px-2 rounded"
+                  style={{ color: "black" }}
+                  placeholder={"Answer"}
+                  value={answer.value[i]}
+                  onChange={handleA(i)}
+                />
+              </div>
+            </div>
+          ))}
+      </div>
+      {selectedCategory.id !== null && (
+        <div className="flex flex-row-reverse p-6">
+          <button
+            className="border p-2 rounded px-5"
+            onClick={() => handleSaveChanges()}
+          >
+            Save
+          </button>
+        </div>
+      )}
+    </>
+  );
+};
+
+const QuestionCluster = ({
+  categories,
+  setCategories,
+  selectedCategory,
+  setSelectedCategory,
+}) => {
+  return (
+    <QuestionForm
+      categories={categories}
+      setCategories={setCategories}
+      selectedCategory={selectedCategory}
+      setSelectedCategory={setSelectedCategory}
+    />
+  );
+};
+
+export default QuestionCluster;
+
+/*
+   <div>
       <button onClick={() => handleSaveChanges()}>Save</button>
       {selectedCategory.id !== null &&
         selectedCategory.questions.map((q, i) => (
@@ -81,30 +148,4 @@ const QuestionForm = ({
           </div>
         ))}
     </div>
-  );
-};
-
-const QuestionCluster = ({
-  categories,
-  setCategories,
-  selectedCategory,
-  setSelectedCategory,
-}) => {
-  return (
-    <div>
-      <div>
-        <h2>Category: {selectedCategory.name}</h2>
-      </div>
-      <div>
-        <QuestionForm
-          categories={categories}
-          setCategories={setCategories}
-          selectedCategory={selectedCategory}
-          setSelectedCategory={setSelectedCategory}
-        />
-      </div>
-    </div>
-  );
-};
-
-export default QuestionCluster;
+*/

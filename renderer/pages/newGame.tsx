@@ -3,20 +3,22 @@ import React, { useState } from "react";
 import CategoryForm from "../components/CategoryForm";
 import QuestionCluster from "../components/QuestionCluster";
 
+const template = {
+  id: null,
+  name: "",
+  questions: [
+    { points: 100, question: "", answer: "" },
+    { points: 200, question: "", answer: "" },
+    { points: 300, question: "", answer: "" },
+    { points: 400, question: "", answer: "" },
+    { points: 500, question: "", answer: "" },
+  ],
+};
+
 export default function NewGame() {
   const [categories, setCategories] = useState([]);
   const [newCategory, setNewCategory] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState({
-    id: null,
-    name: "",
-    questions: [
-      { points: 100, question: "", answer: "" },
-      { points: 200, question: "", answer: "" },
-      { points: 300, question: "", answer: "" },
-      { points: 400, question: "", answer: "" },
-      { points: 500, question: "", answer: "" },
-    ],
-  });
+  const [selectedCategory, setSelectedCategory] = useState(template);
   const maxCat = 7;
 
   //Creates a new category
@@ -43,6 +45,7 @@ export default function NewGame() {
   const removeCategory = (id) => {
     const newArr = categories.filter((item, i) => item.id !== id);
     setCategories(newArr);
+    setSelectedCategory(template);
   };
 
   //Updates 'Add categories field'
@@ -59,13 +62,14 @@ export default function NewGame() {
   };
 
   return (
-    <>
+    <div className="max-w-[1200px] m-auto text-white">
       <Head>
         <title>Create a new game</title>
       </Head>
       <div
         id="newGameHeader"
-        className=" flex  align-center justify-between items-center bg-white p-3 mb-2"
+        style={{ color: "black" }}
+        className=" flex   align-center justify-between items-center bg-white p-3 mb-2"
       >
         <h1 className="text-4xl text-bolder">Create A Game</h1>
         <div className="mr-10">
@@ -84,15 +88,13 @@ export default function NewGame() {
           />
         </div>
       </div>
-      <div>
-        <QuestionCluster
-          categories={categories}
-          setCategories={setCategories}
-          selectedCategory={selectedCategory}
-          setSelectedCategory={setSelectedCategory}
-        />
-      </div>
-    </>
+      <QuestionCluster
+        categories={categories}
+        setCategories={setCategories}
+        selectedCategory={selectedCategory}
+        setSelectedCategory={setSelectedCategory}
+      />
+    </div>
   );
 }
 
