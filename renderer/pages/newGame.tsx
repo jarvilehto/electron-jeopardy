@@ -2,7 +2,6 @@ import Head from "next/head";
 import React, { useState } from "react";
 import CategoryForm from "../components/CategoryForm";
 import QuestionCluster from "../components/QuestionCluster";
-import MenuButton from "../components/MenuButton";
 
 export default function NewGame() {
   const [categories, setCategories] = useState([]);
@@ -24,7 +23,7 @@ export default function NewGame() {
   const createNewCategory = (event: any) => {
     event.preventDefault();
     const nCategory = {
-      id: String(categories.length + 1),
+      id: Math.floor(Math.random() * 9000) + 1000,
       name: newCategory,
       questions: [
         { points: 100, question: "", answer: "" },
@@ -39,6 +38,11 @@ export default function NewGame() {
       setCategories(categories.concat(nCategory));
     }
     setNewCategory("");
+  };
+
+  const removeCategory = (id) => {
+    const newArr = categories.filter((item, i) => item.id !== id);
+    setCategories(newArr);
   };
 
   //Updates 'Add categories field'
@@ -56,6 +60,9 @@ export default function NewGame() {
 
   return (
     <>
+      <Head>
+        <title>Create a new game</title>
+      </Head>
       <div
         id="newGameHeader"
         className=" flex  align-center justify-between items-center bg-white p-3 mb-2"
@@ -73,6 +80,7 @@ export default function NewGame() {
             inputOnChange={handleCategories}
             categories={categories}
             changeCategory={changeCategory}
+            rmCategory={removeCategory}
           />
         </div>
       </div>

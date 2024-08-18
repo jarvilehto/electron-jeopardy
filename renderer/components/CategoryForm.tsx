@@ -1,11 +1,19 @@
-const CategoryCard = ({ name, object, changeCategory }) => {
+const CategoryCard = ({ name, object, changeCategory, rmCategory }) => {
   return (
-    <span
-      className=" border rounded w-[200px] m-1 p-2 hover:border-black text-center"
-      onClick={() => changeCategory(object)}
-    >
-      {name}
-    </span>
+    <>
+      <span
+        className="relative border rounded w-[200px] m-1 p-2 hover:border-black text-center"
+        onClick={() => changeCategory(object)}
+      >
+        <p>{name}</p>
+        <button
+          className="absolute -top-1 right-2"
+          onClick={() => rmCategory(object.id)}
+        >
+          x
+        </button>
+      </span>
+    </>
   );
 };
 
@@ -37,6 +45,7 @@ const CategoryForm = (props) => {
             name={c.name}
             object={c}
             changeCategory={props.changeCategory}
+            rmCategory={props.rmCategory}
           />
         ))}
       </div>
