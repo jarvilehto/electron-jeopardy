@@ -2,6 +2,7 @@ import Head from "next/head";
 import React, { useState } from "react";
 import CategoryForm from "../components/CategoryForm";
 import QuestionCluster from "../components/QuestionCluster";
+import MenuButton from "../components/MenuButton";
 
 const template = {
   id: null,
@@ -74,6 +75,7 @@ export default function NewGame() {
         <h1 className="text-4xl text-bolder">Create A Game</h1>
         <div className="mr-10">
           <button>Load Save</button>
+          <MenuButton text={"Start Game"} navigate={"/gameBoard"} />
         </div>
       </div>
       <div id="newGameCategories">
