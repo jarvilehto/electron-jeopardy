@@ -22,6 +22,9 @@ export default function NewGame() {
   const [selectedCategory, setSelectedCategory] = useState(template);
   const maxCat = 7;
 
+  window.ipc.greet("Hello from newGame");
+  window.ipc.searchDb("test.sqlite");
+  window.ipc.fetchDB();
   //Creates a new category
   const createNewCategory = (event: any) => {
     event.preventDefault();
