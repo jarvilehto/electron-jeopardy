@@ -8,6 +8,7 @@ TODO: IMAGES / MULTI QUESTION / ANSWER / EMBEDS
 TODO: POINT SYSTEM - Add points inside card, modify and add custom points outside of card
 TODO: ADD SOUND WHEN WRONG ANSWER
 TODO: ADD SOUND WHEN CORRECT ANSWER
+TODO: GAMECONTESTANTS INTO A COMPONENT
 */
 
 const QuestionCard = ({ pQ, handleOpenQuestion }) => {
@@ -99,7 +100,6 @@ export default function gameBoard() {
               />
             </form>
           </div>
-          <div></div>
           <div id="contestants-game" className="w-full">
             {contestants.map((contestant, i) => (
               <div

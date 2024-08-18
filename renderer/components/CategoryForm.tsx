@@ -1,16 +1,18 @@
 const CategoryCard = ({ name, object, changeCategory }) => {
   return (
-    <div className="border rounded w-[200px] m-2 p-2 hover:border-black">
+    <span
+      className=" border rounded w-[200px] m-1 p-2 hover:border-black text-center"
+      onClick={() => changeCategory(object)}
+    >
       {name}
-      <button onClick={() => changeCategory(object)}>select</button>
-    </div>
+    </span>
   );
 };
 
 const CategoryForm = (props) => {
   return (
-    <div className="rounded border-slate-100 border">
-      <div className="p-2    flex-col">
+    <div className="bg-white px-2">
+      <div className="px-2 flex flex-row align-center items-center mb-2">
         <h2>Categories {props.categories.length}/7</h2>
         <form
           onSubmit={props.formSubmit}
@@ -19,7 +21,7 @@ const CategoryForm = (props) => {
         >
           <input
             placeholder="Add categories"
-            className="p-1 my-3"
+            className="p-1 ml-4"
             value={props.inputValue}
             onChange={props.inputOnChange}
           />
@@ -28,7 +30,7 @@ const CategoryForm = (props) => {
           </button>
         </form>
       </div>
-      <div>
+      <div className="flex w-full flex-row wrap">
         {props.categories.map((c, i) => (
           <CategoryCard
             key={i}

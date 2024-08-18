@@ -56,6 +56,39 @@ export default function NewGame() {
 
   return (
     <>
+      <div
+        id="newGameHeader"
+        className=" flex  align-center justify-between items-center bg-white p-3 mb-2"
+      >
+        <h1 className="text-4xl text-bolder">Create A Game</h1>
+        <div className="mr-10">
+          <button>Load Save</button>
+        </div>
+      </div>
+      <div id="newGameCategories">
+        <div className="">
+          <CategoryForm
+            formSubmit={createNewCategory}
+            inputValue={newCategory}
+            inputOnChange={handleCategories}
+            categories={categories}
+            changeCategory={changeCategory}
+          />
+        </div>
+      </div>
+      <div>
+        <QuestionCluster
+          categories={categories}
+          setCategories={setCategories}
+          selectedCategory={selectedCategory}
+          setSelectedCategory={setSelectedCategory}
+        />
+      </div>
+    </>
+  );
+}
+
+/*
       <Head>
         <title>Create a new game</title>
       </Head>
@@ -80,6 +113,5 @@ export default function NewGame() {
           />
         </div>
       </div>
-    </>
-  );
-}
+
+*/
