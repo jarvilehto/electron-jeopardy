@@ -44,11 +44,9 @@ export default function gameBoard() {
   };
 
   const getData = async () => {
-    let lol = await window.ipc.getStoredData("2");
-    console.log(lol);
-    let parseJSON = JSON.parse(lol.game);
+    let storedData = await window.ipc.getStoredData();
+    let parseJSON = JSON.parse(storedData.game);
     setCategories(categories.concat(parseJSON));
-    console.log("parseData", parseJSON);
   };
 
   useEffect(() => {

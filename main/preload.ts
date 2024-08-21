@@ -5,9 +5,9 @@ const handler = {
     ipcRenderer.send(channel, value);
   },
 
-  async getStoredData(v) {
+  async getStoredData() {
     let response_ = "response_ pending";
-    response_ = await ipcRenderer.invoke("getStoredData", v);
+    response_ = await ipcRenderer.invoke("getStoredData");
     return response_;
   },
   setStoredData(data) {

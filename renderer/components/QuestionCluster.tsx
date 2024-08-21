@@ -121,31 +121,3 @@ const QuestionCluster = ({
 };
 
 export default QuestionCluster;
-
-/*
-   <div>
-      <button onClick={() => handleSaveChanges()}>Save</button>
-      {selectedCategory.id !== null &&
-        selectedCategory.questions.map((q, i) => (
-          <div key={q.points} className="my-4 mx-2 p-1">
-            <h3>Question points: {q.points}</h3>
-            <div className="flex flex-row wrap">
-              <input
-                className="mx-1 p-1"
-                style={{ color: "black" }}
-                placeholder={"Question"}
-                value={question.value[i]}
-                onChange={handleQ(i)}
-              />
-              <input
-                className="mx-1 p-1"
-                style={{ color: "black" }}
-                placeholder={"Answer"}
-                value={answer.value[i]}
-                onChange={handleA(i)}
-              />
-            </div>
-          </div>
-        ))}
-    </div>
-*/

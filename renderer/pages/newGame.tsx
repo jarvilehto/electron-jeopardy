@@ -30,11 +30,11 @@ export default function NewGame() {
       id: Math.floor(Math.random() * 9000) + 1000,
       name: newCategory,
       questions: [
-        { points: 100, question: "", answer: "" },
-        { points: 200, question: "", answer: "" },
-        { points: 300, question: "", answer: "" },
-        { points: 400, question: "", answer: "" },
-        { points: 500, question: "", answer: "" },
+        { points: 100, question: "", answer: "", answered: false },
+        { points: 200, question: "", answer: "", answered: false },
+        { points: 300, question: "", answer: "", answered: false },
+        { points: 400, question: "", answer: "", answered: false },
+        { points: 500, question: "", answer: "", answered: false },
       ],
     };
 
@@ -45,11 +45,10 @@ export default function NewGame() {
   };
 
   const getData = async () => {
-    let lol = await window.ipc.getStoredData("2");
-    console.log(lol);
-    let parseJSON = JSON.parse(lol.game);
-    console.log("parseData", parseJSON);
+    let savedData = await window.ipc.getStoredData();
+    let parseJSON = JSON.parse(savedData.game);
     setCategories(parseJSON);
+    setGames(parseJSON);
   };
 
   useEffect(() => {
