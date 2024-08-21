@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import PlaceholderData from "../components/PlaceholderData";
 import GameQuestionContainer from "../components/GameQuestionContainer";
 import GameHeaderComponent from "../components/GameHeaderComponent";
@@ -31,10 +31,9 @@ const AnsweredQuestionCard = () => {};
 const ContestantCard = () => {};
 
 export default function gameBoard() {
-  const placeholderQuestions = PlaceholderData;
-  const [categories, setCategories] = useState(placeholderQuestions);
+  const [categories, setCategories] = useState([]);
   const [openQuestion, setOpenQuestion] = useState({ id: 0, points: "" });
-  const [modal, setModal] = useState(true);
+  const [modal, setModal] = useState(false);
   const [contestants, setContestants] = useState([]);
   const [contestant, setContestant] = useState("");
   // USE this + concat to add contestants
@@ -43,6 +42,18 @@ export default function gameBoard() {
     name: "",
     points: "",
   };
+
+  const getData = async () => {
+    let lol = await window.ipc.getStoredData("2");
+    console.log(lol);
+    let parseJSON = JSON.parse(lol.game);
+    setCategories(categories.concat(parseJSON));
+    console.log("parseData", parseJSON);
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
 
   const saveGameState = () => {};
 
@@ -119,18 +130,15 @@ export default function gameBoard() {
 
 const OpenQuestion = (props) => {
   const { categories, openQuestion } = props;
-  /*
-  const CurrentQuestion = categories[openQuestion.id].questions.find(
+
+  const findCategory = categories.find((index) => index.id === openQuestion.id);
+
+  let CurrentQuestion = findCategory.questions.find(
     ({ points }) => points === openQuestion.points
   );
-  */
 
-  const CurrentQuestion = {
-    answer: "ipsum",
-    answered: false,
-    points: 100,
-    question: "lorem",
-  };
+  console.log("CurrentQuestion", CurrentQuestion);
+
   const [showAnswer, setShowAnswer] = useState(false);
 
   return (

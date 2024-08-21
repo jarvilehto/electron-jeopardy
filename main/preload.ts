@@ -7,9 +7,7 @@ const handler = {
 
   async getStoredData(v) {
     let response_ = "response_ pending";
-    console.log("init response: ", response_);
     response_ = await ipcRenderer.invoke("getStoredData", v);
-    console.log('"Awaited response:": ', response_);
     return response_;
   },
   setStoredData(data) {

@@ -49,6 +49,7 @@ export default function NewGame() {
     console.log(lol);
     let parseJSON = JSON.parse(lol.game);
     console.log("parseData", parseJSON);
+    setCategories(parseJSON);
   };
 
   useEffect(() => {
@@ -121,31 +122,3 @@ export default function NewGame() {
     </div>
   );
 }
-
-/*
-      <Head>
-        <title>Create a new game</title>
-      </Head>
-      <div className="w-full h-full text-white">
-        <h1>Create a new game</h1>
-        <MenuButton text={"Start Game"} navigate={"/gameBoard"} />
-        <div className="flex flex-row justify-around">
-          <div className="">
-            <CategoryForm
-              formSubmit={createNewCategory}
-              inputValue={newCategory}
-              inputOnChange={handleCategories}
-              categories={categories}
-              changeCategory={changeCategory}
-            />
-          </div>
-          <QuestionCluster
-            categories={categories}
-            setCategories={setCategories}
-            selectedCategory={selectedCategory}
-            setSelectedCategory={setSelectedCategory}
-          />
-        </div>
-      </div>
-
-*/
