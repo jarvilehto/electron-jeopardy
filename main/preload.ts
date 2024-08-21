@@ -4,14 +4,19 @@ const handler = {
   send(channel: string, value: unknown) {
     ipcRenderer.send(channel, value);
   },
-  searchDb(filename) {
-    ipcRenderer.send("searchDb", filename);
+
+  async getStoredData(v) {
+    let response_ = "response_ pending";
+    console.log("init response: ", response_);
+    response_ = await ipcRenderer.invoke("getStoredData", v);
+    console.log('"Awaited response:": ', response_);
+    return response_;
   },
-  greet(msg) {
-    ipcRenderer.send("greet", msg);
+  setStoredData(data) {
+    ipcRenderer.invoke("setStoredData", data);
   },
-  fetchDB() {
-    ipcRenderer.send("fetchDb");
+  getNumber() {
+    ipcRenderer.invoke("getNumber");
   },
   on(channel: string, callback: (...args: unknown[]) => void) {
     const subscription = (_event: IpcRendererEvent, ...args: unknown[]) =>

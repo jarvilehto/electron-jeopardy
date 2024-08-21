@@ -23,8 +23,7 @@ export default function HomePage() {
         <div className="mb-4">
           <h1>Jeopardy</h1>
         </div>
-        <MenuButton text={"⚡ New Game ⚡"} navigate={"/newGame"} />
-        <MenuButton text={"🗿 Load from File 🗿"} navigate={""} />
+        <MenuButton text={"🗣️ Start 💰"} navigate={"/newGame"} />
       </div>
     </React.Fragment>
   );

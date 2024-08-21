@@ -1,5 +1,5 @@
 import Head from "next/head";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CategoryForm from "../components/CategoryForm";
 import QuestionCluster from "../components/QuestionCluster";
 import MenuButton from "../components/MenuButton";
@@ -17,15 +17,13 @@ const template = {
 };
 
 export default function NewGame() {
+  const [games, setGames] = useState([]);
   const [categories, setCategories] = useState([]);
   const [newCategory, setNewCategory] = useState("");
   const [selectedCategory, setSelectedCategory] = useState(template);
   const maxCat = 7;
-
-  window.ipc.greet("Hello from newGame");
-  window.ipc.searchDb("test.sqlite");
-  window.ipc.fetchDB();
   //Creates a new category
+
   const createNewCategory = (event: any) => {
     event.preventDefault();
     const nCategory = {
@@ -46,6 +44,17 @@ export default function NewGame() {
     setNewCategory("");
   };
 
+  const getData = async () => {
+    let lol = await window.ipc.getStoredData("2");
+    console.log(lol);
+    let parseJSON = JSON.parse(lol.game);
+    console.log("parseData", parseJSON);
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
+
   const removeCategory = (id) => {
     const newArr = categories.filter((item, i) => item.id !== id);
     setCategories(newArr);
@@ -65,6 +74,15 @@ export default function NewGame() {
     });
   };
 
+  const saveGame = async () => {
+    let newSave = {
+      id: Math.floor(Math.random() * 9000) + 1000,
+      game: JSON.stringify(categories),
+    };
+    let test = await window.ipc.setStoredData(newSave);
+    console.log(test);
+  };
+
   return (
     <div className="max-w-[1200px] m-auto text-white">
       <Head>
@@ -79,6 +97,7 @@ export default function NewGame() {
         <div className="mr-10">
           <button>Load Save</button>
           <MenuButton text={"Start Game"} navigate={"/gameBoard"} />
+          <button onClick={() => saveGame()}>save state</button>
         </div>
       </div>
       <div id="newGameCategories">
