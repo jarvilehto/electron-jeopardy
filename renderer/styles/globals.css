@@ -29,6 +29,11 @@
     grid-column-gap: 6px;
     grid-row-gap: 6px;
   }
+
+  #hover-button:hover {
+    background-color: white;
+    color: black;
+  }
 }
 
 @layer components {

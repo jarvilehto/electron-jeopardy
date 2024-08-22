@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 /*
   WIP: ADD ABILITY TO DO EMBED / PICTURE ANSWERS AND QUESTIONS
@@ -21,6 +22,7 @@ const QuestionForm = ({
 
   const handleSaveChanges = () => {
     const catSave = selectedCategory;
+    toast("Saved!");
     catSave.questions.map((q, i) => {
       q.question = question.value[i];
       q.answer = answer.value[i];
@@ -58,6 +60,11 @@ const QuestionForm = ({
   return (
     <>
       <div className="flex flex-row justify-around wrap">
+        {selectedCategory.id === null && (
+          <div className="p-10">
+            <p>Select a category!</p>
+          </div>
+        )}
         {selectedCategory.id !== null &&
           selectedCategory.questions.map((q, i) => (
             <div
@@ -93,6 +100,7 @@ const QuestionForm = ({
       {selectedCategory.id !== null && (
         <div className="flex flex-row-reverse p-6">
           <button
+            id="hover-button"
             className="border p-2 rounded px-5"
             onClick={() => handleSaveChanges()}
           >

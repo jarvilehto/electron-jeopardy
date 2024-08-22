@@ -3,6 +3,14 @@ import React, { useEffect, useState } from "react";
 import CategoryForm from "../components/CategoryForm";
 import QuestionCluster from "../components/QuestionCluster";
 import MenuButton from "../components/MenuButton";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+/*
+TODO: CHOOSE FROM PREV GAMES
+TODO: SAVE TO GAMES
+LATER
+*/
 
 const template = {
   id: null,
@@ -46,7 +54,9 @@ export default function NewGame() {
 
   const getData = async () => {
     let savedData = await window.ipc.getStoredData();
+    console.log(savedData);
     let parseJSON = JSON.parse(savedData.game);
+    console.log(parseJSON);
     setCategories(parseJSON);
     setGames(parseJSON);
   };
@@ -75,8 +85,9 @@ export default function NewGame() {
   };
 
   const saveGame = async () => {
+    //TODO: CHECK FOR PRE EXISTING SAVE?
     let newSave = {
-      id: Math.floor(Math.random() * 9000) + 1000,
+      //id: Math.floor(Math.random() * 9000) + 1000,
       game: JSON.stringify(categories),
     };
     let test = await window.ipc.setStoredData(newSave);
@@ -118,6 +129,7 @@ export default function NewGame() {
         selectedCategory={selectedCategory}
         setSelectedCategory={setSelectedCategory}
       />
+      <ToastContainer />
     </div>
   );
 }

@@ -1,12 +1,11 @@
 import React from "react";
 import Head from "next/head";
-import Link from "next/link";
 import Image from "next/image";
 import MenuButton from "../components/MenuButton";
 
 export default function HomePage() {
   return (
-    <React.Fragment>
+    <>
       <Head>
         <title>Jeopardy andy</title>
       </Head>
@@ -25,6 +24,6 @@ export default function HomePage() {
         </div>
         <MenuButton text={"🗣️ Start 💰"} navigate={"/newGame"} />
       </div>
-    </React.Fragment>
+    </>
   );
 }
