@@ -13,13 +13,14 @@ export default function HomePage() {
         <div>
           <Image
             className="ml-auto mr-auto"
-            src="/images/logo.png"
+            src="/images/CircledNoja.png"
             alt="Logo image"
             width={256}
             height={256}
           />
         </div>
         <div className="mb-4">
+          <h1 id="makara">Jeopardy</h1>
           <h1>Jeopardy</h1>
         </div>
         <MenuButton text={"🗣️ Start 💰"} navigate={"/newGame"} />
