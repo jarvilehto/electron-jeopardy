@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import CategoryForm from "../components/CategoryForm";
 import QuestionCluster from "../components/QuestionCluster";
 import MenuButton from "../components/MenuButton";
-import { ToastContainer } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 /*
@@ -54,7 +54,6 @@ export default function NewGame() {
 
   const getData = async () => {
     let savedData = await window.ipc.getStoredData();
-    console.log(savedData);
     let parseJSON = JSON.parse(savedData.game);
     console.log(parseJSON);
     setCategories(parseJSON);
@@ -91,20 +90,21 @@ export default function NewGame() {
       game: JSON.stringify(categories),
     };
     let test = await window.ipc.setStoredData(newSave);
+    toast("Game saved!");
     console.log(test);
   };
 
   return (
     <div className="max-w-[1200px] m-auto text-white">
       <Head>
-        <title>Create a new game</title>
+        <title>Create and Edit</title>
       </Head>
       <div
         id="newGameHeader"
         style={{ color: "black" }}
         className=" flex   align-center justify-between items-center bg-white p-3 mb-2"
       >
-        <h1 className="text-4xl text-bolder">Create A Game</h1>
+        <h1 className="text-4xl text-bolder">Create and Edit</h1>
         <div className="mr-10">
           <button>Load Save</button>
           <MenuButton text={"Start Game"} navigate={"/gameBoard"} />

@@ -22,7 +22,7 @@ const QuestionForm = ({
 
   const handleSaveChanges = () => {
     const catSave = selectedCategory;
-    toast("Saved!");
+    toast("Category saved!");
     catSave.questions.map((q, i) => {
       q.question = question.value[i];
       q.answer = answer.value[i];
