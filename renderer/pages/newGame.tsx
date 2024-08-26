@@ -90,7 +90,16 @@ export default function NewGame() {
       game: JSON.stringify(categories),
     };
     let test = await window.ipc.setStoredData(newSave);
-    toast("Game saved!");
+    toast.success("Game Saved!", {
+      position: "bottom-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
     console.log(test);
   };
 

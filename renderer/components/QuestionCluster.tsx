@@ -22,7 +22,16 @@ const QuestionForm = ({
 
   const handleSaveChanges = () => {
     const catSave = selectedCategory;
-    toast("Category saved!");
+    toast.success("Category Saved!", {
+      position: "bottom-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
     catSave.questions.map((q, i) => {
       q.question = question.value[i];
       q.answer = answer.value[i];
