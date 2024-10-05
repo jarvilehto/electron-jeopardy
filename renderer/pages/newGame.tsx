@@ -5,7 +5,8 @@ import QuestionCluster from "../components/QuestionCluster";
 import MenuButton from "../components/MenuButton";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import Image from "next/image";
+import { URL } from "url";
 /*
 TODO: CHOOSE FROM PREV GAMES
 TODO: SAVE TO GAMES
@@ -29,6 +30,7 @@ export default function NewGame() {
   const [categories, setCategories] = useState([]);
   const [newCategory, setNewCategory] = useState("");
   const [selectedCategory, setSelectedCategory] = useState(template);
+  const [tester, setTester] = useState("");
   const maxCat = 7;
   //Creates a new category
 
@@ -38,11 +40,56 @@ export default function NewGame() {
       id: Math.floor(Math.random() * 9000) + 1000,
       name: newCategory,
       questions: [
-        { points: 100, question: "", answer: "", answered: false },
-        { points: 200, question: "", answer: "", answered: false },
-        { points: 300, question: "", answer: "", answered: false },
-        { points: 400, question: "", answer: "", answered: false },
-        { points: 500, question: "", answer: "", answered: false },
+        {
+          points: 100,
+          question: "",
+          answer: "",
+          answered: false,
+          hasImgQ: false,
+          hasImgA: false,
+          imgQ: "",
+          imgA: "",
+        },
+        {
+          points: 200,
+          question: "",
+          answer: "",
+          answered: false,
+          hasImgQ: false,
+          hasImgA: false,
+          imgQ: "",
+          imgA: "",
+        },
+        {
+          points: 300,
+          question: "",
+          answer: "",
+          answered: false,
+          hasImgQ: false,
+          hasImgA: false,
+          imgQ: "",
+          imgA: "",
+        },
+        {
+          points: 400,
+          question: "",
+          answer: "",
+          answered: false,
+          hasImgQ: false,
+          hasImgA: false,
+          imgQ: "",
+          imgA: "",
+        },
+        {
+          points: 500,
+          question: "",
+          answer: "",
+          answered: false,
+          hasImgQ: false,
+          hasImgA: false,
+          imgQ: "",
+          imgA: "",
+        },
       ],
     };
 
@@ -58,6 +105,13 @@ export default function NewGame() {
     console.log(parseJSON);
     setCategories(parseJSON);
     setGames(parseJSON);
+  };
+
+  const chooseFile = async () => {
+    const testRes = await window.ipc.openFile();
+    let take = tester;
+    take = testRes;
+    setTester(take);
   };
 
   useEffect(() => {
@@ -102,12 +156,21 @@ export default function NewGame() {
     });
     console.log(test);
   };
-
   return (
     <div className="max-w-[1200px] m-auto text-white">
       <Head>
         <title>Create and Edit</title>
       </Head>
+      {tester != "" && (
+        <Image
+          className="ml-auto mr-auto"
+          src={`media-loader:///${tester}`}
+          alt="Logo image"
+          width={256}
+          height={256}
+        />
+      )}
+      <button onClick={() => chooseFile()}>Open Diag</button>
       <div
         id="newGameHeader"
         style={{ color: "black" }}

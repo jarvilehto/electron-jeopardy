@@ -1,8 +1,18 @@
-import path from "path";
-import { app, BrowserWindow, ipcMain } from "electron";
+import path from "node:path";
+import {
+  app,
+  BrowserWindow,
+  ipcMain,
+  ipcRenderer,
+  dialog,
+  protocol,
+  net,
+} from "electron";
 import serve from "electron-serve";
 import { createWindow } from "./helpers";
 import Store from "electron-store";
+import fs from "fs";
+import url, { fileURLToPath, pathToFileURL } from "node:url";
 
 const store = new Store();
 
@@ -14,8 +24,22 @@ if (isProd) {
   app.setPath("userData", `${app.getPath("userData")} (development)`);
 }
 
+const handleFileOpen = async () => {
+  const { canceled, filePaths } = await dialog.showOpenDialog();
+  if (!canceled) {
+    return filePaths[0];
+  }
+};
+
 (async () => {
-  await app.whenReady();
+  await app.whenReady().then(() => {
+    protocol.handle("media-loader", (request) => {
+      const reqUrl = new URL(request.url);
+      return net.fetch(pathToFileURL(reqUrl.pathname.substring(1)));
+    });
+  });
+
+  ipcMain.handle("dialog:openFile", handleFileOpen);
 
   const mainWindow = createWindow("main", {
     width: 1000,

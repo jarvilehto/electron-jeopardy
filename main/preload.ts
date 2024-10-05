@@ -16,6 +16,14 @@ const handler = {
   getNumber() {
     ipcRenderer.invoke("getNumber");
   },
+  chooseFile() {
+    ipcRenderer.send("chooseFile");
+  },
+  async openFile() {
+    let response_ = await ipcRenderer.invoke("dialog:openFile");
+    return response_;
+  },
+
   on(channel: string, callback: (...args: unknown[]) => void) {
     const subscription = (_event: IpcRendererEvent, ...args: unknown[]) =>
       callback(...args);

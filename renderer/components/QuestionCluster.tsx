@@ -1,10 +1,11 @@
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 /*
   WIP: ADD ABILITY TO DO EMBED / PICTURE ANSWERS AND QUESTIONS
   TODO: Multiple answers
-  TODO: Add Embed files / Pictures to questions and answers
+  //TODO: Add Embed files / Pictures to questions and answers
 */
 
 const QuestionForm = ({
@@ -19,6 +20,15 @@ const QuestionForm = ({
   const [answer, setAnswer] = useState({
     value: { 0: "", 1: "", 2: "", 3: "", 4: "" },
   });
+
+  const [imgQuestion, setImgQuestion] = useState({
+    value: { 0: "", 1: "", 2: "", 3: "", 4: "" },
+  });
+  const [imgAnswer, setImgAnswer] = useState({
+    value: { 0: "", 1: "", 2: "", 3: "", 4: "" },
+  });
+
+  console.log(selectedCategory);
 
   const handleSaveChanges = () => {
     const catSave = selectedCategory;
@@ -35,6 +45,8 @@ const QuestionForm = ({
     catSave.questions.map((q, i) => {
       q.question = question.value[i];
       q.answer = answer.value[i];
+      q.imgQ = imgQuestion.value[i];
+      q.imgA = imgAnswer.value[i];
     });
     setSelectedCategory(catSave);
   };
@@ -42,12 +54,18 @@ const QuestionForm = ({
   const testFunc = () => {
     let qValue = question.value;
     let aValue = answer.value;
+    let imgQValue = imgQuestion.value;
+    let imgAValue = imgAnswer.value;
     selectedCategory.questions.map((q, i) => {
       qValue[i] = q.question;
       aValue[i] = q.answer;
+      imgQValue[i] = q.imgQ;
+      imgAValue[i] = q.imgA;
     });
     setQuestion({ value: qValue });
     setAnswer({ value: aValue });
+    setImgQuestion({ value: imgQValue });
+    setImgAnswer({ value: imgAValue });
   };
 
   useEffect(() => {
@@ -64,6 +82,19 @@ const QuestionForm = ({
     let { value } = answer;
     value[index] = event.target.value;
     setAnswer({ value });
+  };
+
+  const chooseFile = async (index, isAnswer) => {
+    const testRes = await window.ipc.openFile();
+    if (isAnswer) {
+      let { value } = imgAnswer;
+      value[index] = testRes;
+      setImgAnswer({ value });
+    } else {
+      let { value } = imgQuestion;
+      value[index] = testRes;
+      setImgQuestion({ value });
+    }
   };
 
   return (
@@ -83,11 +114,27 @@ const QuestionForm = ({
               <div className="border-b w-full mb-2">
                 <h3 className="text-center text-xl py-1">{q.points}</h3>
               </div>
+              <div>
+                <Image
+                  className="ml-auto mr-auto"
+                  src={`media-loader:///${imgQuestion.value[i]}`}
+                  alt="Logo image"
+                  width={100}
+                  height={100}
+                />
+                <button onClick={() => chooseFile(i, false)}>
+                  Add Question Image
+                </button>
+                <Image
+                  className="ml-auto mr-auto"
+                  src={`media-loader:///${imgAnswer.value[i]}`}
+                  alt="Logo image"
+                  width={256}
+                  height={256}
+                />
+                <button>Add Answer Image</button>
+              </div>
               <div className="flex flex-col wrap">
-                {/*
-                  * Add radio buttons for 
-                  - Media Question/Answer
-                */}
                 <input
                   className="my-1 p-1 px-2 rounded"
                   style={{ color: "black" }}
