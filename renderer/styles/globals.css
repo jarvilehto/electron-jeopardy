@@ -7,6 +7,13 @@
     @apply bg-gray-900;
   }
 
+  #__next {
+    height: 100vh;
+    width: 100%;
+    background-color: rgb(48, 56, 69);
+    color: whitesmoke;
+  }
+
   #gameBoard {
     display: grid;
     padding: 5px;
@@ -33,9 +40,6 @@
   #hover-button:hover {
     background-color: white;
     color: black;
-  }
-
-  #makara {
   }
 }
 

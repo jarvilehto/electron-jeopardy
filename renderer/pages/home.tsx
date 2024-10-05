@@ -7,24 +7,18 @@ export default function HomePage() {
   return (
     <>
       <Head>
-        <title>Jeopardy andy</title>
+        <title>Jeopardy!! - YEAH -</title>
       </Head>
-      <div className="grid grid-col-1 text-2xl w-full text-center text-white">
-        <div>
-          <Image
-            className="ml-auto mr-auto"
-            src="/images/CircledNoja.png"
-            alt="Logo image"
-            width={256}
-            height={256}
-          />
+      <div className="w-full h-full flex">
+        <div className="max-w-[500px] max-h-[400px] w-full h-full m-auto  bg-white">
+          <h1 className="text-3xl">What a whimsical game</h1>
+          <div>
+            <MenuButton text={"Begin"} navigate={"/newGame"} />
+          </div>
         </div>
-        <div className="mb-4">
-          <h1 id="makara">Jeopardy</h1>
-          <h1>Jeopardy</h1>
-        </div>
-        <MenuButton text={"🗣️ Start 💰"} navigate={"/newGame"} />
       </div>
     </>
   );
 }
+
+//<MenuButton text={"🗣️ Start 💰"} navigate={"/newGame"} />

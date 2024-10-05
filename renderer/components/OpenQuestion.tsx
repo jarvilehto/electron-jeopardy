@@ -34,9 +34,12 @@ src="https://www.youtube.com/embed/W7MrDt_NPFk
       let tester = searchURL.get("v");
       return `https://www.youtube.com/embed/${tester}`;
     } else {
-      const searchURL = new URL(CurrentQuestion.question);
-      let tester = searchURL.pathname.substring(1);
-      return `https://streamable.com/e/${tester}`;
+      let test = CurrentQuestion.question.includes("streamable");
+      if (test) {
+        const searchURL = new URL(CurrentQuestion.question);
+        let tester = searchURL.pathname.substring(1);
+        return `https://streamable.com/e/${tester}`;
+      }
     }
   };
 
@@ -51,7 +54,7 @@ src="https://www.youtube.com/embed/W7MrDt_NPFk
         {!showAnswer && (
           <>
             <h1 className="text-6xl" style={{ color: "black" }}>
-              {/*CurrentQuestion.question*/}
+              {CurrentQuestion.question}
             </h1>
             <div
               style={{

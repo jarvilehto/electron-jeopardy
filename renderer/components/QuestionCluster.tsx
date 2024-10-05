@@ -28,8 +28,6 @@ const QuestionForm = ({
     value: { 0: "", 1: "", 2: "", 3: "", 4: "" },
   });
 
-  console.log(selectedCategory);
-
   const handleSaveChanges = () => {
     const catSave = selectedCategory;
     toast.success("Category Saved!", {
@@ -72,16 +70,16 @@ const QuestionForm = ({
     testFunc();
   }, [selectedCategory]);
 
-  const handleQ = (index) => (event) => {
-    let { value } = question;
-    value[index] = event.target.value;
-    setQuestion({ value });
-  };
-
-  const handleA = (index) => (event) => {
-    let { value } = answer;
-    value[index] = event.target.value;
-    setAnswer({ value });
+  const handleQA = (index, isAnswer) => (event) => {
+    if (isAnswer) {
+      let { value } = answer;
+      value[index] = event.target.value;
+      setAnswer({ value });
+    } else {
+      let { value } = question;
+      value[index] = event.target.value;
+      setQuestion({ value });
+    }
   };
 
   const chooseFile = async (index, isAnswer) => {
@@ -132,7 +130,9 @@ const QuestionForm = ({
                   width={256}
                   height={256}
                 />
-                <button>Add Answer Image</button>
+                <button onClick={() => chooseFile(i, true)}>
+                  Add Answer Image
+                </button>
               </div>
               <div className="flex flex-col wrap">
                 <input
@@ -140,14 +140,14 @@ const QuestionForm = ({
                   style={{ color: "black" }}
                   placeholder={"Question"}
                   value={question.value[i]}
-                  onChange={handleQ(i)}
+                  onChange={handleQA(i, false)}
                 />
                 <input
                   className="my-1 p-1 px-2 rounded"
                   style={{ color: "black" }}
                   placeholder={"Answer"}
                   value={answer.value[i]}
-                  onChange={handleA(i)}
+                  onChange={handleQA(i, true)}
                 />
               </div>
             </div>
