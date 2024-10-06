@@ -5,8 +5,6 @@ import QuestionCluster from "../components/QuestionCluster";
 import MenuButton from "../components/MenuButton";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Image from "next/image";
-import { URL } from "url";
 /*
 TODO: CHOOSE FROM PREV GAMES
 TODO: SAVE TO GAMES
@@ -26,11 +24,9 @@ const template = {
 };
 
 export default function NewGame() {
-  const [games, setGames] = useState([]);
   const [categories, setCategories] = useState([]);
   const [newCategory, setNewCategory] = useState("");
   const [selectedCategory, setSelectedCategory] = useState(template);
-  const [tester, setTester] = useState("");
   const maxCat = 7;
   //Creates a new category
 
@@ -97,6 +93,7 @@ export default function NewGame() {
       setCategories(categories.concat(nCategory));
     }
     setNewCategory("");
+    saveGame();
   };
 
   const getData = async () => {
@@ -104,14 +101,6 @@ export default function NewGame() {
     let parseJSON = JSON.parse(savedData.game);
     console.log(parseJSON);
     setCategories(parseJSON);
-    setGames(parseJSON);
-  };
-
-  const chooseFile = async () => {
-    const testRes = await window.ipc.openFile();
-    let take = tester;
-    take = testRes;
-    setTester(take);
   };
 
   useEffect(() => {
@@ -122,6 +111,7 @@ export default function NewGame() {
     const newArr = categories.filter((item, i) => item.id !== id);
     setCategories(newArr);
     setSelectedCategory(template);
+    saveGame();
   };
 
   //Updates 'Add categories field'
@@ -138,53 +128,47 @@ export default function NewGame() {
   };
 
   const saveGame = async () => {
-    //TODO: CHECK FOR PRE EXISTING SAVE?
     let newSave = {
-      //id: Math.floor(Math.random() * 9000) + 1000,
       game: JSON.stringify(categories),
     };
-    let test = await window.ipc.setStoredData(newSave);
-    toast.success("Game Saved!", {
-      position: "bottom-right",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "dark",
-    });
-    console.log(test);
+    await window.ipc.setStoredData(newSave);
   };
   return (
-    <div className="max-w-[1200px] m-auto text-white">
+    <div className="max-w-[900px] m-auto text-white p-2">
       <Head>
         <title>Create and Edit</title>
       </Head>
-      {tester != "" && (
-        <Image
-          className="ml-auto mr-auto"
-          src={`media-loader:///${tester}`}
-          alt="Logo image"
-          width={256}
-          height={256}
-        />
-      )}
-      <button onClick={() => chooseFile()}>Open Diag</button>
       <div
         id="newGameHeader"
         style={{ color: "black" }}
         className=" flex   align-center justify-between items-center bg-white p-3 mb-2"
       >
-        <h1 className="text-4xl text-bolder">Create and Edit</h1>
+        <div className="w-[500px]">
+          <h1>Create</h1>
+          <p>
+            You can add categories by typing in the "add categories" field and
+            pressing enter. To remove a category you can do so by pressing the
+            '❌' next to the category name. To embed media add a youtube or
+            streamable link to either question or answer input fields. Add an
+            Image using the 🖼️ and remove it with ❌. Allowed files: jpeg, jpg,
+            png, gif.
+          </p>
+        </div>
         <div className="mr-10">
-          <button>Load Save</button>
-          <MenuButton text={"Start Game"} navigate={"/gameBoard"} />
+          <MenuButton text={"Main Menu"} navigate={"/home"} style={"mr-4"} />
+          <MenuButton
+            text={"Start Game"}
+            navigate={"/gameBoard"}
+            style={"mr-4"}
+          />
           <button onClick={() => saveGame()}>save state</button>
         </div>
       </div>
-      <div id="newGameCategories">
-        <div className="">
+      <div
+        id="newGameCategories"
+        className="flex flex-col sm:flex-row mt-4 justify-around"
+      >
+        <div className="w-full sm:w-1/3">
           <CategoryForm
             formSubmit={createNewCategory}
             inputValue={newCategory}
@@ -192,15 +176,18 @@ export default function NewGame() {
             categories={categories}
             changeCategory={changeCategory}
             rmCategory={removeCategory}
+            selectedCategory={selectedCategory}
+          />
+        </div>
+        <div className="w-full sm:w-2/3">
+          <QuestionCluster
+            categories={categories}
+            setCategories={setCategories}
+            selectedCategory={selectedCategory}
+            setSelectedCategory={setSelectedCategory}
           />
         </div>
       </div>
-      <QuestionCluster
-        categories={categories}
-        setCategories={setCategories}
-        selectedCategory={selectedCategory}
-        setSelectedCategory={setSelectedCategory}
-      />
       <ToastContainer />
     </div>
   );

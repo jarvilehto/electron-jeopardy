@@ -1,20 +1,35 @@
-const CategoryCard = ({ name, object, changeCategory, rmCategory }) => {
+const CategoryCard = ({
+  name,
+  object,
+  changeCategory,
+  rmCategory,
+  selectedCategory,
+}) => {
+  const bgColor = () => {
+    if (selectedCategory.id == object.id) {
+      return "green";
+    } else {
+      return "";
+    }
+  };
+
   return (
     <>
-      <div className="flex flex-row mr-2">
+      <div className="flex flex-row w-full">
         <span
-          className=" border rounded max-w-[200px] min-w-[50px] m-1 p-2 hover:border-black text-center"
+          className=" border rounded w-full m-1 p-2 hover:border-black text-center relative z-2"
+          style={{ backgroundColor: bgColor() }}
           onClick={() => changeCategory(object)}
         >
-          <p>{name}</p>
+          <p className="text-md">{name}</p>
+          <button
+            style={{}}
+            className=" absolute right-0 top-0 text-center rounded-sm z-0"
+            onClick={() => rmCategory(object.id)}
+          >
+            <p className="text-sm">❌</p>
+          </button>
         </span>
-        <button
-          style={{ color: "red" }}
-          className=" w-4 h-4 "
-          onClick={() => rmCategory(object.id)}
-        >
-          x
-        </button>
       </div>
     </>
   );
@@ -22,23 +37,26 @@ const CategoryCard = ({ name, object, changeCategory, rmCategory }) => {
 
 const CategoryForm = (props) => {
   return (
-    <div className=" px-2 mb-5 flex flex-row-reverse  items-center">
-      <div className="px-2 flex flex-row align-center items-center mb-3 pt-4">
-        <h3>Categories: {props.categories.length}/7</h3>
+    <div className=" flex flex-col px-4 mb-3">
+      <div className=" flex flex-col  mb-3">
+        <h3 className="mt-2 text-center border-b">
+          {" "}
+          {props.categories.length}/7
+        </h3>
         <form
           onSubmit={props.formSubmit}
-          className=""
+          className="mt-3"
           style={{ color: "black" }}
         >
           <input
             placeholder="Add categories"
-            className="p-1 ml-4 rounded"
+            className="p-1  rounded w-full"
             value={props.inputValue}
             onChange={props.inputOnChange}
           />
         </form>
       </div>
-      <div className="flex w-full flex-row wrap">
+      <div className="flex w-full flex-col wrap">
         {props.categories.map((c, i) => (
           <CategoryCard
             key={i}
@@ -46,6 +64,7 @@ const CategoryForm = (props) => {
             object={c}
             changeCategory={props.changeCategory}
             rmCategory={props.rmCategory}
+            selectedCategory={props.selectedCategory}
           />
         ))}
       </div>
