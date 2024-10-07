@@ -9,11 +9,16 @@ const QuestionForm = ({ selectedCategory, setSelectedCategory }) => {
   const [answer, setAnswer] = useState({
     value: { 0: "", 1: "", 2: "", 3: "", 4: "" },
   });
-
   const [imgQuestion, setImgQuestion] = useState({
     value: { 0: "", 1: "", 2: "", 3: "", 4: "" },
   });
   const [imgAnswer, setImgAnswer] = useState({
+    value: { 0: "", 1: "", 2: "", 3: "", 4: "" },
+  });
+  const [embedQuestion, setEmbedQuestion] = useState({
+    value: { 0: "", 1: "", 2: "", 3: "", 4: "" },
+  });
+  const [embedAnswer, setEmbedAnswer] = useState({
     value: { 0: "", 1: "", 2: "", 3: "", 4: "" },
   });
 
@@ -24,6 +29,8 @@ const QuestionForm = ({ selectedCategory, setSelectedCategory }) => {
       q.answer = answer.value[i];
       q.imgQ = imgQuestion.value[i];
       q.imgA = imgAnswer.value[i];
+      q.embedQ = embedQuestion.value[i];
+      q.embedA = embedAnswer.value[i];
     });
     setSelectedCategory(catSave);
   };
@@ -33,11 +40,15 @@ const QuestionForm = ({ selectedCategory, setSelectedCategory }) => {
     let aValue = answer.value;
     let imgQValue = imgQuestion.value;
     let imgAValue = imgAnswer.value;
+    let embedQVal = embedQuestion.value;
+    let embedAVal = embedAnswer.value;
     selectedCategory.questions.map((q, i) => {
       qValue[i] = q.question;
       aValue[i] = q.answer;
       imgQValue[i] = q.imgQ;
       imgAValue[i] = q.imgA;
+      embedQVal[i] = q.embedQ;
+      embedAVal[i] = q.embedA;
     });
     setQuestion({ value: qValue });
     setAnswer({ value: aValue });
@@ -61,6 +72,8 @@ const QuestionForm = ({ selectedCategory, setSelectedCategory }) => {
     }
     handleSaveChanges();
   };
+
+  const handleEmbeds = (index, isAnswer) => (event) => {};
 
   const chooseFile = async (index, isAnswer) => {
     const testRes = await window.ipc.openFile();
@@ -105,8 +118,10 @@ const QuestionForm = ({ selectedCategory, setSelectedCategory }) => {
                 key={q.points}
                 className="flex flex-col border rounded p-2 mb-4"
               >
-                <div className="  mb-2">
-                  <h3 className=" text-large py-1 ">Points: {q.points}</h3>
+                <div className="mb-2 ">
+                  <h3 className=" text-large py-1 text-center ">
+                    Points: {q.points}
+                  </h3>
                 </div>
                 <div className="flex justify-around flex-col sm:flex-row">
                   {/*//Question */}
@@ -136,6 +151,13 @@ const QuestionForm = ({ selectedCategory, setSelectedCategory }) => {
                           height={150}
                         />
                       )}
+                      <input
+                        className="my-1 p-1 px-2 rounded-sm w-full my-2"
+                        style={{ color: "black" }}
+                        placeholder={"Embed video Q"}
+                        value={embedQuestion.value[i]}
+                        onChange={handleEmbeds(i, false)}
+                      />
                     </div>
                   </div>
                   {/*//Answer */}
@@ -165,6 +187,13 @@ const QuestionForm = ({ selectedCategory, setSelectedCategory }) => {
                           height={150}
                         />
                       )}
+                      <input
+                        className="my-1 p-1 px-2 rounded-sm w-full my-2"
+                        style={{ color: "black" }}
+                        placeholder={"Embed video A"}
+                        value={embedAnswer.value[i]}
+                        onChange={handleEmbeds(i, true)}
+                      />
                     </div>
                   </div>
                 </div>

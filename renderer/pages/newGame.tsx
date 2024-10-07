@@ -45,6 +45,8 @@ export default function NewGame() {
           hasImgA: false,
           imgQ: "",
           imgA: "",
+          embedQ: "",
+          embedA: "",
         },
         {
           points: 200,
@@ -55,6 +57,8 @@ export default function NewGame() {
           hasImgA: false,
           imgQ: "",
           imgA: "",
+          embedQ: "",
+          embedA: "",
         },
         {
           points: 300,
@@ -65,6 +69,8 @@ export default function NewGame() {
           hasImgA: false,
           imgQ: "",
           imgA: "",
+          embedQ: "",
+          embedA: "",
         },
         {
           points: 400,
@@ -75,6 +81,8 @@ export default function NewGame() {
           hasImgA: false,
           imgQ: "",
           imgA: "",
+          embedQ: "",
+          embedA: "",
         },
         {
           points: 500,
@@ -85,12 +93,15 @@ export default function NewGame() {
           hasImgA: false,
           imgQ: "",
           imgA: "",
+          embedQ: "",
+          embedA: "",
         },
       ],
     };
 
     if (categories.length !== maxCat) {
       setCategories(categories.concat(nCategory));
+      saveGame();
     }
     setNewCategory("");
     saveGame();
