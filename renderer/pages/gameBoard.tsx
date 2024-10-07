@@ -61,7 +61,7 @@ export default function gameBoard() {
   };
   return (
     <>
-      <div className="p-5 relative">
+      <div className="p-5 w-full h-full relative flex flex-col justify-center items-center">
         {modal && (
           <OpenQuestion
             toggleModal={setModal}

@@ -27,11 +27,12 @@
 
   #questionColumn div {
     height: 80px;
-    background-color: blueviolet;
     display: flex;
+    outline: solid 2px whitesmoke;
     justify-content: center;
     align-items: center;
     margin-top: 10px;
+    font-style: bold;
   }
 
   #contestants-game {

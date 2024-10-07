@@ -4,12 +4,14 @@ const GameHeaderComponent = () => {
   return (
     <div
       id="gameHeader"
-      className=" flex  align-center justify-between items-center bg-white p-3 mb-5"
+      className=" flex w-full items-center   mb-5 max-w-[1200px]"
     >
-      <h1 className="text-4xl text-bolder">Game Name</h1>
-      <div className="mr-10">
-        <MenuButton style={"mr-5"} text={"Menu"} navigate={"/newGame"} />
-        <button>Reset</button>
+      <div className="">
+        <MenuButton
+          style={"mr-5 text-center bg-white p-2 rounded"}
+          text={"Menu"}
+          navigate={"/newGame"}
+        />
       </div>
     </div>
   );

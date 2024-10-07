@@ -5,11 +5,7 @@ import QuestionCluster from "../components/QuestionCluster";
 import MenuButton from "../components/MenuButton";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-/*
-TODO: CHOOSE FROM PREV GAMES
-TODO: SAVE TO GAMES
-LATER
-*/
+import Link from "next/link";
 
 const template = {
   id: null,
@@ -156,23 +152,14 @@ export default function NewGame() {
       >
         <div className="w-[500px]">
           <h1>Create</h1>
-          <p>
-            You can add categories by typing in the "add categories" field and
-            pressing enter. To remove a category you can do so by pressing the
-            '❌' next to the category name. To embed media add a youtube or
-            streamable link to either question or answer input fields. Add an
-            Image using the 🖼️ and remove it with ❌. Allowed files: jpeg, jpg,
-            png, gif.
-          </p>
         </div>
         <div className="mr-10">
-          <MenuButton text={"Main Menu"} navigate={"/home"} style={"mr-4"} />
-          <MenuButton
-            text={"Start Game"}
-            navigate={"/gameBoard"}
-            style={"mr-4"}
-          />
-          <button onClick={() => saveGame()}>save state</button>
+          <Link href="/Home" className="mr-4" onClick={() => saveGame()}>
+            <button>Menu</button>
+          </Link>
+          <Link href="/gameBoard" className="mr-4" onClick={() => saveGame()}>
+            <button>Start</button>
+          </Link>
         </div>
       </div>
       <div

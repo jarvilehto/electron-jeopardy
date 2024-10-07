@@ -5,7 +5,7 @@ const GameContestantContainer = ({
   contestants,
 }) => {
   return (
-    <div id="gameContestants" className=" p-2 my-5 bg-white">
+    <div id="gameContestants" className=" p-2 my-5 w-full max-w-[1000px]">
       <div className="flex flex-row items-center justify-between border-b pb-3">
         <h1>Contestants</h1>
         <form onSubmit={createContestant}>

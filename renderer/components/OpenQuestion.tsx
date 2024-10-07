@@ -7,6 +7,7 @@ TODO: MP3 UPLOAD
 */
 
 const OpenQuestion = (props) => {
+  console.log(props);
   const { categories, openQuestion } = props;
 
   const findCategory = categories.find((index) => index.id === openQuestion.id);
@@ -49,7 +50,7 @@ src="https://www.youtube.com/embed/W7MrDt_NPFk
   const [showAnswer, setShowAnswer] = useState(false);
 
   return (
-    <div className="absolute border-2 border-black top-28 h-[500px] left-32 right-32 bg-white text-black">
+    <div className="absolute w-full h-3/4 border-2 border-black bg-white text-black">
       <div className="w-full h-full flex flex-col justify-center items-center relative">
         {!showAnswer && (
           <>
@@ -96,7 +97,12 @@ src="https://www.youtube.com/embed/W7MrDt_NPFk
           </>
         )}
         <div className="absolute top-0 right-2 text-2xl mr-2">
-          <button onClick={() => props.toggleModal(false)}>x</button>
+          <button
+            onClick={() => props.toggleModal(false)}
+            style={{ color: "black" }}
+          >
+            x
+          </button>
         </div>
       </div>
     </div>
