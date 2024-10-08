@@ -6,7 +6,7 @@
   body {
     @apply bg-gray-900;
     height: 100vh;
-    background-color: rgb(48, 56, 69);
+    background-color: rgb(37, 37, 37);
   }
 
   #__next {
@@ -20,19 +20,23 @@
 
   #gameBoard {
     display: grid;
-    padding: 5px;
+    padding: 10px;
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    grid-column-gap: 10px;
+    column-gap: 9px;
   }
 
   #questionColumn div {
     height: 80px;
     display: flex;
-    outline: solid 2px whitesmoke;
     justify-content: center;
     align-items: center;
     margin-top: 10px;
     font-style: bold;
+  }
+
+  #cardContainerChild {
+    margin: 10px;
+    background-color: rgb(28, 102, 205);
   }
 
   #contestants-game {

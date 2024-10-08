@@ -1,85 +1,84 @@
+import Image from "next/image";
 import { useState } from "react";
 
 /*
+ */
 
-TODO: MP3 UPLOAD
-
-*/
-
-const OpenQuestion = (props) => {
-  console.log(props);
-  const { categories, openQuestion } = props;
-
+const OpenQuestion = ({
+  openQuestion,
+  categories,
+  contestants,
+  setContestants,
+  toggleModal,
+}) => {
   const findCategory = categories.find((index) => index.id === openQuestion.id);
-
   let CurrentQuestion = findCategory.questions.find(
     ({ points }) => points === openQuestion.points
   );
 
-  /*
-    Use this to test 
-    https://www.youtube.com/watch?v=W7MrDt_NPFk normal youtube link 
-    https://www.youtube.com/embed/W7MrDt_NPFk
+  const [showAnswer, setShowAnswer] = useState(false);
 
-    "https://streamable.com/e/hodezr" <- e means embed 
-
-src="https://www.youtube.com/embed/W7MrDt_NPFk
-
-
-  
-  */
-  const DetermineEmbed = () => {
-    let test = CurrentQuestion.question.includes("youtube");
-    if (test) {
-      const searchURL = new URL(CurrentQuestion.question).searchParams;
+  const DetermineEmbed = (url) => {
+    if (url.includes("youtube")) {
+      const searchURL = new URL(url).searchParams;
       let tester = searchURL.get("v");
       return `https://www.youtube.com/embed/${tester}`;
     } else {
-      let test = CurrentQuestion.question.includes("streamable");
-      if (test) {
-        const searchURL = new URL(CurrentQuestion.question);
+      if (url.includes("streamable")) {
+        const searchURL = new URL(url);
         let tester = searchURL.pathname.substring(1);
         return `https://streamable.com/e/${tester}`;
       }
     }
   };
 
-  console.log("CurrentQuestion", CurrentQuestion);
-  DetermineEmbed();
-
-  const [showAnswer, setShowAnswer] = useState(false);
-
   return (
-    <div className="absolute w-full h-3/4 border-2 border-black bg-white text-black">
-      <div className="w-full h-full flex flex-col justify-center items-center relative">
+    <div className="absolute w-full max-w-[1200px] h-3/4 border-2 border-black bg-white text-black">
+      <div className="w-full h-full flex flex-col justify-center items-center relative py-4">
         {!showAnswer && (
           <>
-            <h1 className="text-6xl" style={{ color: "black" }}>
+            <h1 className="text-3xl text-center" style={{ color: "black" }}>
               {CurrentQuestion.question}
             </h1>
-            <div
-              style={{
-                position: "relative",
-                width: "100%",
-                height: "100%",
-                paddingBottom: "56,250%",
-              }}
-            >
-              <iframe
-                height="100%"
-                src={DetermineEmbed()}
-                width="100%"
+            {CurrentQuestion.embedQ !== "" && (
+              <div
                 style={{
-                  border: "none",
-                  width: "100",
+                  width: "80%",
                   height: "100%",
-                  position: "absolute",
-                  left: "0px",
-                  top: "0px",
-                  overflow: "hidden",
                 }}
-              ></iframe>
-            </div>
+                className="flex justify-center items-center"
+              >
+                <iframe
+                  height="90%"
+                  src={DetermineEmbed(CurrentQuestion.embedQ)}
+                  width="90%"
+                  style={{}}
+                  className="m-4"
+                ></iframe>
+              </div>
+            )}
+            {CurrentQuestion.imgQ !== "" && (
+              <div
+                style={{
+                  width: "100%",
+                  height: "100%",
+                }}
+                className="flex items-center justify-center"
+              >
+                <Image
+                  className=""
+                  src={`media-loader:///${CurrentQuestion.imgQ}`}
+                  alt="Logo image"
+                  style={{
+                    width: "auto",
+                    height: "auto",
+                  }}
+                  width={250}
+                  height={150}
+                />
+              </div>
+            )}
+
             <div className="absolute bottom-0 right-2 text-4xl p-2">
               <button onClick={() => setShowAnswer(!showAnswer)}>✅</button>
               <button>❌</button>
@@ -88,19 +87,56 @@ src="https://www.youtube.com/embed/W7MrDt_NPFk
         )}
         {showAnswer && (
           <>
-            <h1 className="text-6xl" style={{ color: "black" }}>
+            <h1
+              className="text-3xl text-center mt-3"
+              style={{ color: "black" }}
+            >
               {CurrentQuestion.answer}
             </h1>
+            {CurrentQuestion.embedA !== "" && (
+              <div
+                style={{
+                  width: "80%",
+                  height: "100%",
+                }}
+                className="flex justify-center items-center"
+              >
+                <iframe
+                  height="90%"
+                  src={DetermineEmbed(CurrentQuestion.embedA)}
+                  width="90%"
+                  style={{}}
+                  className="m-4"
+                ></iframe>
+              </div>
+            )}
+            {CurrentQuestion.imgA !== "" && (
+              <div
+                style={{
+                  width: "100%",
+                  height: "100%",
+                }}
+                className="flex items-center justify-center p-5"
+              >
+                <Image
+                  className=""
+                  src={`media-loader:///${CurrentQuestion.imgA}`}
+                  alt="Logo image"
+                  style={{ height: "100%", width: "auto" }}
+                  width={250}
+                  height={150}
+                />
+              </div>
+            )}
+
             <div className="absolute bottom-0 right-2 text-4xl p-2">
+              <button onClick={() => setShowAnswer(!showAnswer)}>⬅️</button>
               <button>🏆</button>
             </div>
           </>
         )}
         <div className="absolute top-0 right-2 text-2xl mr-2">
-          <button
-            onClick={() => props.toggleModal(false)}
-            style={{ color: "black" }}
-          >
+          <button onClick={() => toggleModal(false)} style={{ color: "black" }}>
             x
           </button>
         </div>

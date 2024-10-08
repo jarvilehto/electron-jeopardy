@@ -72,7 +72,7 @@ const SingleCategory = ({
           <input
             className="my-1 p-1 px-2 w-full rounded-sm"
             style={{ color: "black" }}
-            placeholder={"Question"}
+            placeholder={"Answer"}
             value={answer.value[i]}
             onChange={handleQA(i, true)}
           />
