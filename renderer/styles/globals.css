@@ -40,9 +40,9 @@
 
   #contestants-game {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 2fr));
-    grid-column-gap: 6px;
-    grid-row-gap: 6px;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 2fr));
+    grid-column-gap: 30px;
+    grid-row-gap: 25px;
   }
 
   #hover-button:hover {

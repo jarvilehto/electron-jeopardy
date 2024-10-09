@@ -225,6 +225,7 @@ const QuestionForm = ({ selectedCategory, setSelectedCategory }) => {
             selectedCategory.questions.map((q, i) => (
               <>
                 <SingleCategory
+                  key={i}
                   i={i}
                   q={q}
                   handleQA={handleQA}

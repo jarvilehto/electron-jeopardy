@@ -37,7 +37,7 @@ const OpenQuestion = ({
       {!showAnswer && (
         <div
           id=""
-          className=" h-full text-center max-w-[1200px] h-[480px] flex m-auto flex-col items-center justify-center"
+          className=" text-center max-w-[1200px] h-[480px] flex m-auto flex-col items-center justify-center"
         >
           <h1
             className="text-3xl text-center"
@@ -50,7 +50,7 @@ const OpenQuestion = ({
               style={{
                 width: "100%",
                 height: "100%",
-                maxWidth: "800px",
+                maxWidth: "500px",
               }}
               className="flex justify-center items-center"
             >
@@ -70,7 +70,12 @@ const OpenQuestion = ({
               fill={false}
               objectFit="none"
               objectPosition="50% 50%"
-              style={{ height: "90%", width: "auto" }}
+              style={{
+                height: "auto",
+                width: "auto",
+                maxWidth: "800px",
+                maxHeight: "480px",
+              }}
               width={450}
               height={300}
             />

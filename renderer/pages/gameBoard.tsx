@@ -34,8 +34,6 @@ export default function gameBoard() {
     getData();
   }, []);
 
-  const saveGameState = () => {};
-
   const handleOpenQuestion = (id: number, points: string) => {
     setModal(!modal);
     const openQuestion = {
@@ -59,6 +57,14 @@ export default function gameBoard() {
     setContestants(contestants.concat(newContestant));
     setContestant("");
   };
+
+  const addPoints = (id, amount) => {
+    console.log(id, amount);
+  };
+  const removePoints = (id, amount) => {
+    console.log(id, amount);
+  };
+
   return (
     <>
       <div className="">
@@ -83,6 +89,8 @@ export default function gameBoard() {
           contestant={contestant}
           handleContestantInput={handleContestantInput}
           contestants={contestants}
+          addPoints={addPoints}
+          removePoints={removePoints}
         />
       </div>
     </>
