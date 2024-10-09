@@ -10,6 +10,7 @@ const OpenQuestion = ({
   contestants,
   setContestants,
   toggleModal,
+  setAnswered,
 }) => {
   const findCategory = categories.find((index) => index.id === openQuestion.id);
   let CurrentQuestion = findCategory.questions.find(
@@ -140,7 +141,7 @@ const OpenQuestion = ({
         </div>
 
         <div>
-          <button>🏆</button>
+          <button onClick={() => setAnswered(CurrentQuestion)}>🏆</button>
         </div>
       </div>
 

@@ -43,6 +43,12 @@ export default function gameBoard() {
     setOpenQuestion(openQuestion);
   };
 
+  const setAnswered = (id) => {
+    // ADD STUFF TO MAKE THE ANSWER GO FALSE! :)
+    // RENDER BG COLOR AS RED THEN! :)
+    id.answered = !id.answered;
+  };
+
   const handleContestantInput = (e) => {
     setContestant(e.target.value);
   };
@@ -58,13 +64,6 @@ export default function gameBoard() {
     setContestant("");
   };
 
-  const addPoints = (id, amount) => {
-    console.log(id, amount);
-  };
-  const removePoints = (id, amount) => {
-    console.log(id, amount);
-  };
-
   return (
     <>
       <div className="">
@@ -76,6 +75,7 @@ export default function gameBoard() {
             categories={categories}
             contestants={contestant}
             setContestants={setContestant}
+            setAnswered={setAnswered}
           />
         )}
         {!modal && (
@@ -89,8 +89,6 @@ export default function gameBoard() {
           contestant={contestant}
           handleContestantInput={handleContestantInput}
           contestants={contestants}
-          addPoints={addPoints}
-          removePoints={removePoints}
         />
       </div>
     </>

@@ -5,8 +5,6 @@ const GameContestantContainer = ({
   contestant,
   handleContestantInput,
   contestants,
-  addPoints,
-  removePoints,
 }) => {
   const [points, setPoints] = useState({});
 
@@ -14,13 +12,6 @@ const GameContestantContainer = ({
     setPoints((prevPoints) => ({
       ...prevPoints,
       [contestantName]: e.target.value,
-    }));
-  };
-
-  const clearPoints = (contestantName) => {
-    setPoints((prevPoints) => ({
-      ...prevPoints,
-      [contestantName]: "",
     }));
   };
 
