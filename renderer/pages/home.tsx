@@ -10,7 +10,7 @@ export default function HomePage() {
       <Head>
         <title>Jeopardy!! - YEAH -</title>
       </Head>
-      <div className="w-full h-full flex relative">
+      <div className="w-screen h-screen flex relative">
         <div className="absolute bottom-0 right-0 z-2">
           <Noja />
         </div>

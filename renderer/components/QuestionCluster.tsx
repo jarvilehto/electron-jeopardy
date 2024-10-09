@@ -254,8 +254,6 @@ const QuestionCluster = ({
 }) => {
   return (
     <QuestionForm
-      categories={categories}
-      setCategories={setCategories}
       selectedCategory={selectedCategory}
       setSelectedCategory={setSelectedCategory}
     />

@@ -33,71 +33,68 @@ const OpenQuestion = ({
   };
 
   return (
-    <div className="absolute w-full max-w-[1200px] h-3/4 border-2 border-black bg-white text-black">
-      <div className="w-full h-full flex flex-col justify-center items-center relative py-4">
-        {!showAnswer && (
-          <>
-            <h1 className="text-3xl text-center" style={{ color: "black" }}>
-              {CurrentQuestion.question}
-            </h1>
-            {CurrentQuestion.embedQ !== "" && (
-              <div
-                style={{
-                  width: "80%",
-                  height: "100%",
-                }}
-                className="flex justify-center items-center"
-              >
-                <iframe
-                  height="90%"
-                  src={DetermineEmbed(CurrentQuestion.embedQ)}
-                  width="90%"
-                  style={{}}
-                  className="m-4"
-                ></iframe>
-              </div>
-            )}
-            {CurrentQuestion.imgQ !== "" && (
-              <div
-                style={{
-                  width: "100%",
-                  height: "100%",
-                }}
-                className="flex items-center justify-center"
-              >
-                <Image
-                  className=""
-                  src={`media-loader:///${CurrentQuestion.imgQ}`}
-                  alt="Logo image"
-                  style={{
-                    width: "auto",
-                    height: "auto",
-                  }}
-                  width={250}
-                  height={150}
-                />
-              </div>
-            )}
-
-            <div className="absolute bottom-0 right-2 text-4xl p-2">
-              <button onClick={() => setShowAnswer(!showAnswer)}>✅</button>
-              <button>❌</button>
+    <>
+      {!showAnswer && (
+        <div
+          id=""
+          className=" h-full text-center max-w-[1200px] h-[480px] flex m-auto flex-col items-center justify-center"
+        >
+          <h1
+            className="text-3xl text-center"
+            style={{ color: "white", fontWeight: "bold" }}
+          >
+            {CurrentQuestion.question}
+          </h1>
+          {CurrentQuestion.embedQ !== "" && (
+            <div
+              style={{
+                width: "100%",
+                height: "100%",
+                maxWidth: "800px",
+              }}
+              className="flex justify-center items-center"
+            >
+              <iframe
+                height="90%"
+                src={DetermineEmbed(CurrentQuestion.embedQ)}
+                width="90%"
+                style={{}}
+                className="m-4"
+              ></iframe>
             </div>
-          </>
-        )}
-        {showAnswer && (
-          <>
+          )}
+          {CurrentQuestion.imgQ !== "" && (
+            <Image
+              src={`media-loader:///${CurrentQuestion.imgQ}`}
+              alt="Logo image"
+              fill={false}
+              objectFit="none"
+              objectPosition="50% 50%"
+              style={{ height: "90%", width: "auto" }}
+              width={450}
+              height={300}
+            />
+          )}
+        </div>
+      )}
+      {showAnswer && (
+        <>
+          <div
+            id=""
+            className="  text-center max-w-[1200px] h-[480px] flex m-auto flex-col items-center justify-center"
+          >
             <h1
-              className="text-3xl text-center mt-3"
-              style={{ color: "black" }}
+              className="text-3xl text-center"
+              style={{ color: "white", fontWeight: "bold" }}
             >
               {CurrentQuestion.answer}
             </h1>
             {CurrentQuestion.embedA !== "" && (
               <div
                 style={{
-                  width: "80%",
+                  width: "100%",
                   height: "100%",
+                  maxWidth: "800px",
                 }}
                 className="flex justify-center items-center"
               >
@@ -111,38 +108,134 @@ const OpenQuestion = ({
               </div>
             )}
             {CurrentQuestion.imgA !== "" && (
-              <div
+              <Image
+                src={`media-loader:///${CurrentQuestion.imgA}`}
+                alt="Logo image"
+                fill={false}
+                objectFit="none"
+                objectPosition="50% 50%"
                 style={{
-                  width: "100%",
-                  height: "100%",
+                  height: "auto",
+                  width: "auto",
+                  maxWidth: "800px",
+                  maxHeight: "480px",
                 }}
-                className="flex items-center justify-center p-5"
-              >
-                <Image
-                  className=""
-                  src={`media-loader:///${CurrentQuestion.imgA}`}
-                  alt="Logo image"
-                  style={{ height: "100%", width: "auto" }}
-                  width={250}
-                  height={150}
-                />
-              </div>
+                width={450}
+                height={300}
+              />
             )}
+          </div>
+        </>
+      )}
 
-            <div className="absolute bottom-0 right-2 text-4xl p-2">
-              <button onClick={() => setShowAnswer(!showAnswer)}>⬅️</button>
-              <button>🏆</button>
-            </div>
-          </>
-        )}
-        <div className="absolute top-0 right-2 text-2xl mr-2">
-          <button onClick={() => toggleModal(false)} style={{ color: "black" }}>
-            x
-          </button>
+      <div className=" right-2 text-4xl p-2 flex w-full flex justify-around">
+        <div>
+          <button onClick={() => setShowAnswer(!showAnswer)}>✅</button>
+          <button onClick={() => setShowAnswer(!showAnswer)}>⬅️</button>
+        </div>
+
+        <div>
+          <button>🏆</button>
         </div>
       </div>
-    </div>
+
+      <div className="absolute top-0 right-2 text-2xl mr-2">
+        <button onClick={() => toggleModal(false)} style={{ color: "white" }}>
+          x
+        </button>
+      </div>
+    </>
   );
 };
 
 export default OpenQuestion;
+
+/*
+ {!showAnswer && (
+        <>
+          <h1 className="text-3xl text-center" style={{ color: "black" }}>
+            {CurrentQuestion.question}
+          </h1>
+          {CurrentQuestion.embedQ !== "" && (
+            <div
+              style={{
+                width: "80%",
+                height: "100%",
+              }}
+              className="flex justify-center items-center"
+            >
+              <iframe
+                height="90%"
+                src={DetermineEmbed(CurrentQuestion.embedQ)}
+                width="90%"
+                style={{}}
+                className="m-4"
+              ></iframe>
+            </div>
+          )}
+          {CurrentQuestion.imgQ !== "" && (
+            <div className="">
+              <Image
+                src={`media-loader:///${CurrentQuestion.imgQ}`}
+                alt="Logo image"
+                fill={false}
+                objectFit="contain"
+                width={500}
+                height={500}
+              />
+            </div>
+          )}
+
+          <div className="absolute bottom-0 right-2 text-4xl p-2">
+            <button onClick={() => setShowAnswer(!showAnswer)}>✅</button>
+            <button>❌</button>
+          </div>
+        </>
+      )}
+      {showAnswer && (
+        <>
+          <h1 className="text-3xl text-center mt-3" style={{ color: "black" }}>
+            {CurrentQuestion.answer}
+          </h1>
+          {CurrentQuestion.embedA !== "" && (
+            <div
+              style={{
+                width: "80%",
+                height: "100%",
+              }}
+              className="flex justify-center items-center"
+            >
+              <iframe
+                height="90%"
+                src={DetermineEmbed(CurrentQuestion.embedA)}
+                width="90%"
+                style={{}}
+                className="m-4"
+              ></iframe>
+            </div>
+          )}
+          {CurrentQuestion.imgA !== "" && (
+            <div className="flex items-center justify-center p-5 ">
+              <Image
+                className=""
+                src={`media-loader:///${CurrentQuestion.imgA}`}
+                alt="Logo image"
+                fill={true}
+                objectFit="contain"
+              />
+            </div>
+          )}
+
+          <div className="absolute bottom-0 right-2 text-4xl p-2">
+            <button onClick={() => setShowAnswer(!showAnswer)}>⬅️</button>
+            <button>🏆</button>
+          </div>
+        </>
+      )}
+      <div className="absolute top-0 right-2 text-2xl mr-2">
+        <button onClick={() => toggleModal(false)} style={{ color: "black" }}>
+          x
+        </button>
+      </div>
+
+*/

@@ -5,7 +5,7 @@ const GameContestantContainer = ({
   contestants,
 }) => {
   return (
-    <div id="gameContestants" className=" p-2 my-5 w-full max-w-[1100px] ">
+    <div id="gameContestants" className="m-auto max-w-[1200px] my-4 px-5">
       <div className="flex flex-row items-center justify-between border-b pb-3">
         <h1>Contestants</h1>
         <form onSubmit={createContestant}>
@@ -19,7 +19,7 @@ const GameContestantContainer = ({
           />
         </form>
       </div>
-      <div id="contestants-game" className="w-full">
+      <div id="contestants-game" className="w-full py-4">
         {contestants.map((contestant, i) => (
           <div
             key={i}

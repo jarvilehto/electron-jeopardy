@@ -2,7 +2,7 @@ const GameQuestionContainer = (props) => {
   const { categories, handleOpenQuestion } = props;
 
   return (
-    <div id="gameBoard" className=" text-center max-w-[1200px] min-w-[500px]">
+    <div id="gameBoard" className=" text-center ">
       {categories.map((c) => (
         <div key={c.id} style={{ backgroundColor: "" }}>
           {c.name}

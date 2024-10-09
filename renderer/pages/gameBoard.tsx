@@ -25,7 +25,7 @@ export default function gameBoard() {
   const [contestant, setContestant] = useState("");
 
   const getData = async () => {
-    let storedData = await window.ipc.getStoredData();
+    let storedData: any = await window.ipc.getStoredData();
     let parseJSON = JSON.parse(storedData.game);
     setCategories(categories.concat(parseJSON));
   };
@@ -61,7 +61,8 @@ export default function gameBoard() {
   };
   return (
     <>
-      <div className="p-5 w-full h-full relative flex flex-col justify-center items-center">
+      <div className="">
+        <GameHeaderComponent />
         {modal && (
           <OpenQuestion
             toggleModal={setModal}
@@ -71,11 +72,12 @@ export default function gameBoard() {
             setContestants={setContestant}
           />
         )}
-        <GameHeaderComponent />
-        <GameQuestionContainer
-          categories={categories}
-          handleOpenQuestion={handleOpenQuestion}
-        />
+        {!modal && (
+          <GameQuestionContainer
+            categories={categories}
+            handleOpenQuestion={handleOpenQuestion}
+          />
+        )}
         <GameContestantContainer
           createContestant={createContestant}
           contestant={contestant}

@@ -5,13 +5,10 @@
 @layer base {
   body {
     @apply bg-gray-900;
-    height: 100vh;
     background-color: rgb(37, 37, 37);
   }
 
   #__next {
-    width: 100%;
-    height: 100%;
     color: whitesmoke;
   }
 
@@ -19,6 +16,8 @@
   }
 
   #gameBoard {
+    margin: auto;
+    max-width: 1200px;
     display: grid;
     padding: 10px;
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -26,7 +25,7 @@
   }
 
   #questionColumn div {
-    height: 80px;
+    height: 75px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -49,6 +48,12 @@
   #hover-button:hover {
     background-color: white;
     color: black;
+  }
+
+  #open-question {
+    background-color: rgba(100, 100, 100, 0.67);
+    width: 100%;
+    height: 100%;
   }
 }
 

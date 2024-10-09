@@ -104,7 +104,7 @@ export default function NewGame() {
   };
 
   const getData = async () => {
-    let savedData = await window.ipc.getStoredData();
+    let savedData: any = await window.ipc.getStoredData();
     let parseJSON = JSON.parse(savedData.game);
     console.log(parseJSON);
     setCategories(parseJSON);
@@ -154,7 +154,7 @@ export default function NewGame() {
           <h1>Create</h1>
         </div>
         <div className="mr-10">
-          <Link href="/Home" className="mr-4" onClick={() => saveGame()}>
+          <Link href="/home" className="mr-4" onClick={() => saveGame()}>
             <button>Menu</button>
           </Link>
           <Link href="/gameBoard" className="mr-4" onClick={() => saveGame()}>
