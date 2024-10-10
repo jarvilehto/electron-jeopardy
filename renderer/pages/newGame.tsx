@@ -179,8 +179,6 @@ export default function NewGame() {
         </div>
         <div className="w-full sm:w-2/3">
           <QuestionCluster
-            categories={categories}
-            setCategories={setCategories}
             selectedCategory={selectedCategory}
             setSelectedCategory={setSelectedCategory}
           />

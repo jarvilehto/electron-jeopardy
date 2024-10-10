@@ -5,18 +5,6 @@ import GameHeaderComponent from "../components/GameHeaderComponent";
 import GameContestantContainer from "../components/GameContestantContainer";
 import OpenQuestion from "../components/OpenQuestion";
 
-/*
-TODO: IMAGES / MULTI QUESTION / ANSWER / EMBEDS
-TODO: POINT SYSTEM - Add points inside card, modify and add custom points outside of card
-TODO: ADD SOUND WHEN WRONG ANSWER
-TODO: ADD SOUND WHEN CORRECT ANSWER
-TODO: GAMECONTESTANTS INTO A COMPONENT
-*/
-
-const AnsweredQuestionCard = () => {};
-
-const ContestantCard = () => {};
-
 export default function gameBoard() {
   const [categories, setCategories] = useState([]);
   const [openQuestion, setOpenQuestion] = useState({ id: 0, points: "" });
@@ -27,7 +15,14 @@ export default function gameBoard() {
   const getData = async () => {
     let storedData: any = await window.ipc.getStoredData();
     let parseJSON = JSON.parse(storedData.game);
-    setCategories(categories.concat(parseJSON));
+    const updatedCategories = parseJSON.map((category) => ({
+      ...category,
+      questions: category.questions.map((question) => ({
+        ...question,
+        answered: question.answered ?? false, // If undefined, set to false
+      })),
+    }));
+    setCategories(updatedCategories);
   };
 
   useEffect(() => {
@@ -43,10 +38,21 @@ export default function gameBoard() {
     setOpenQuestion(openQuestion);
   };
 
-  const setAnswered = (id) => {
-    // ADD STUFF TO MAKE THE ANSWER GO FALSE! :)
-    // RENDER BG COLOR AS RED THEN! :)
-    id.answered = !id.answered;
+  const setAnswered = (categoryId, points) => {
+    setCategories((prevCategories) =>
+      prevCategories.map((cat) =>
+        cat.id === categoryId
+          ? {
+              ...cat,
+              questions: cat.questions.map((question) => {
+                return question.points === points
+                  ? { ...question, answered: !question.answered }
+                  : question;
+              }),
+            }
+          : cat
+      )
+    );
   };
 
   const handleContestantInput = (e) => {

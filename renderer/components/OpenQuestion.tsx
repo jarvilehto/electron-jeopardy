@@ -13,6 +13,7 @@ const OpenQuestion = ({
   setAnswered,
 }) => {
   const findCategory = categories.find((index) => index.id === openQuestion.id);
+  console.log(findCategory);
   let CurrentQuestion = findCategory.questions.find(
     ({ points }) => points === openQuestion.points
   );
@@ -141,7 +142,11 @@ const OpenQuestion = ({
         </div>
 
         <div>
-          <button onClick={() => setAnswered(CurrentQuestion)}>🏆</button>
+          <button
+            onClick={() => setAnswered(openQuestion.id, openQuestion.points)}
+          >
+            🏆
+          </button>
         </div>
       </div>
 
